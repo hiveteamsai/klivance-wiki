@@ -1,0 +1,5057 @@
+{
+ "app": {
+  "admin_erisim": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.admin_erisim_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "admin_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "hedef_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "hedef_kume",
+     "tip": "ARRAY",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "kayit_sayisi",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "yol",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "eylem",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 8
+    },
+    {
+     "ad": "ip",
+     "tip": "inet",
+     "null": true,
+     "vars": "",
+     "sira": 9
+    },
+    {
+     "ad": "hedef_kayit",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 10
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "admin_erisim_admin_idx",
+     "tanim": "CREATE INDEX admin_erisim_admin_idx ON app.admin_erisim USING btree (admin_id, at DESC)"
+    },
+    {
+     "ad": "admin_erisim_at_idx",
+     "tanim": "CREATE INDEX admin_erisim_at_idx ON app.admin_erisim USING btree (at DESC)"
+    },
+    {
+     "ad": "admin_erisim_hedef_idx",
+     "tanim": "CREATE INDEX admin_erisim_hedef_idx ON app.admin_erisim USING btree (hedef_id, at DESC) WHERE (hedef_id IS NOT NULL)"
+    },
+    {
+     "ad": "admin_erisim_kayit_idx",
+     "tanim": "CREATE INDEX admin_erisim_kayit_idx ON app.admin_erisim USING btree (hedef_kayit, at DESC) WHERE (hedef_kayit IS NOT NULL)"
+    },
+    {
+     "ad": "admin_erisim_kume_idx",
+     "tanim": "CREATE INDEX admin_erisim_kume_idx ON app.admin_erisim USING gin (hedef_kume)"
+    },
+    {
+     "ad": "admin_erisim_pkey",
+     "tanim": "CREATE UNIQUE INDEX admin_erisim_pkey ON app.admin_erisim USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "admin_erisim_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "answer_layer": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.answer_layer_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "message_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "katman",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "durum",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "tetiklendi",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "ms",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "cost_usd",
+     "tip": "numeric",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 8
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "answer_layer_katman_idx",
+     "tanim": "CREATE INDEX answer_layer_katman_idx ON app.answer_layer USING btree (katman, created_at)"
+    },
+    {
+     "ad": "answer_layer_msg_idx",
+     "tanim": "CREATE INDEX answer_layer_msg_idx ON app.answer_layer USING btree (message_id)"
+    },
+    {
+     "ad": "answer_layer_pkey",
+     "tanim": "CREATE UNIQUE INDEX answer_layer_pkey ON app.answer_layer USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "answer_layer_durum_ck",
+     "tanim": "CHECK ((durum = ANY (ARRAY['ok'::text, 'unavailable'::text, 'error'::text])))",
+     "tip": "c"
+    },
+    {
+     "ad": "answer_layer_message_id_fkey",
+     "tanim": "FOREIGN KEY (message_id) REFERENCES app.message(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "answer_layer_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    },
+    {
+     "ad": "answer_layer_tetik_ck",
+     "tanim": "CHECK (((durum = 'ok'::text) OR (tetiklendi IS NULL)))",
+     "tip": "c"
+    }
+   ],
+   "yorum": ""
+  },
+  "appointment": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.appointment_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "case_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "kind",
+     "tip": "text",
+     "null": false,
+     "vars": "'randevu'::text",
+     "sira": 4
+    },
+    {
+     "ad": "starts_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "title",
+     "tip": "text",
+     "null": false,
+     "vars": "''::text",
+     "sira": 6
+    },
+    {
+     "ad": "done",
+     "tip": "boolean",
+     "null": false,
+     "vars": "false",
+     "sira": 7
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 8
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "appointment_case_idx",
+     "tanim": "CREATE INDEX appointment_case_idx ON app.appointment USING btree (case_id) WHERE (case_id IS NOT NULL)"
+    },
+    {
+     "ad": "appointment_doctor_time_idx",
+     "tanim": "CREATE INDEX appointment_doctor_time_idx ON app.appointment USING btree (doctor_id, starts_at)"
+    },
+    {
+     "ad": "appointment_pkey",
+     "tanim": "CREATE UNIQUE INDEX appointment_pkey ON app.appointment USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "appointment_case_id_fkey",
+     "tanim": "FOREIGN KEY (case_id) REFERENCES app.case_note(id) ON DELETE SET NULL",
+     "tip": "f"
+    },
+    {
+     "ad": "appointment_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "appointment_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "case_file": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.case_file_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "case_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "filename",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "mime_type",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "size_bytes",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "sha256",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "content_enc",
+     "tip": "bytea",
+     "null": false,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "extracted_text",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 9
+    },
+    {
+     "ad": "extracted_model",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 10
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 11
+    },
+    {
+     "ad": "deleted_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 12
+    },
+    {
+     "ad": "on_okuma",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 13
+    },
+    {
+     "ad": "on_okuma_model",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 14
+    },
+    {
+     "ad": "on_okuma_durum",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 15
+    },
+    {
+     "ad": "on_okuma_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 16
+    },
+    {
+     "ad": "on_okuma_onay_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 17
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "case_file_case_idx",
+     "tanim": "CREATE INDEX case_file_case_idx ON app.case_file USING btree (case_id) WHERE (deleted_at IS NULL)"
+    },
+    {
+     "ad": "case_file_deleted_idx",
+     "tanim": "CREATE INDEX case_file_deleted_idx ON app.case_file USING btree (deleted_at) WHERE (deleted_at IS NOT NULL)"
+    },
+    {
+     "ad": "case_file_doctor_idx",
+     "tanim": "CREATE INDEX case_file_doctor_idx ON app.case_file USING btree (doctor_id)"
+    },
+    {
+     "ad": "case_file_pkey",
+     "tanim": "CREATE UNIQUE INDEX case_file_pkey ON app.case_file USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "case_file_case_id_fkey",
+     "tanim": "FOREIGN KEY (case_id) REFERENCES app.case_note(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "case_file_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "case_file_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "case_note": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.case_note_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "code",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "age_band",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "sex",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "narrative",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 7
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 8
+    },
+    {
+     "ad": "chronic",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 9
+    },
+    {
+     "ad": "meds",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 10
+    },
+    {
+     "ad": "last_visit",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 11
+    },
+    {
+     "ad": "egfr",
+     "tip": "numeric",
+     "null": true,
+     "vars": "",
+     "sira": 12
+    },
+    {
+     "ad": "kreatinin",
+     "tip": "numeric",
+     "null": true,
+     "vars": "",
+     "sira": 13
+    },
+    {
+     "ad": "kilo_kg",
+     "tip": "numeric",
+     "null": true,
+     "vars": "",
+     "sira": 14
+    },
+    {
+     "ad": "gebelik_haftasi",
+     "tip": "smallint",
+     "null": true,
+     "vars": "",
+     "sira": 15
+    },
+    {
+     "ad": "boy_cm",
+     "tip": "numeric",
+     "null": true,
+     "vars": "",
+     "sira": 16
+    },
+    {
+     "ad": "allergy_status",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 17
+    },
+    {
+     "ad": "allergies",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 18
+    },
+    {
+     "ad": "gebe_olabilir",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 19
+    },
+    {
+     "ad": "emziriyor",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 20
+    },
+    {
+     "ad": "yas",
+     "tip": "smallint",
+     "null": true,
+     "vars": "",
+     "sira": 21
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "case_doctor_code_uniq",
+     "tanim": "CREATE UNIQUE INDEX case_doctor_code_uniq ON app.case_note USING btree (doctor_id, code)"
+    },
+    {
+     "ad": "case_doctor_idx",
+     "tanim": "CREATE INDEX case_doctor_idx ON app.case_note USING btree (doctor_id)"
+    },
+    {
+     "ad": "case_note_doctor_visit_idx",
+     "tanim": "CREATE INDEX case_note_doctor_visit_idx ON app.case_note USING btree (doctor_id, last_visit DESC NULLS LAST)"
+    },
+    {
+     "ad": "case_note_pkey",
+     "tanim": "CREATE UNIQUE INDEX case_note_pkey ON app.case_note USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "case_doctor_code_uniq",
+     "tanim": "UNIQUE (doctor_id, code)",
+     "tip": "u"
+    },
+    {
+     "ad": "case_note_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "case_note_egfr_chk",
+     "tanim": "CHECK (((egfr IS NULL) OR ((egfr >= (0)::numeric) AND (egfr <= (250)::numeric))))",
+     "tip": "c"
+    },
+    {
+     "ad": "case_note_gebelik_chk",
+     "tanim": "CHECK (((gebelik_haftasi IS NULL) OR ((gebelik_haftasi >= 0) AND (gebelik_haftasi <= 42))))",
+     "tip": "c"
+    },
+    {
+     "ad": "case_note_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "case_timeline": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.case_timeline_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "case_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "body",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "model",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "lang",
+     "tip": "text",
+     "null": false,
+     "vars": "'tr'::text",
+     "sira": 6
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 7
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "case_timeline_case_idx",
+     "tanim": "CREATE INDEX case_timeline_case_idx ON app.case_timeline USING btree (case_id, created_at DESC)"
+    },
+    {
+     "ad": "case_timeline_doctor_idx",
+     "tanim": "CREATE INDEX case_timeline_doctor_idx ON app.case_timeline USING btree (doctor_id)"
+    },
+    {
+     "ad": "case_timeline_pkey",
+     "tanim": "CREATE UNIQUE INDEX case_timeline_pkey ON app.case_timeline USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "case_timeline_case_id_fkey",
+     "tanim": "FOREIGN KEY (case_id) REFERENCES app.case_note(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "case_timeline_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "case_timeline_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "case_visit": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.case_visit_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "case_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "note",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    },
+    {
+     "ad": "thread_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "case_visit_pkey",
+     "tanim": "CREATE UNIQUE INDEX case_visit_pkey ON app.case_visit USING btree (id)"
+    },
+    {
+     "ad": "visit_case_idx",
+     "tanim": "CREATE INDEX visit_case_idx ON app.case_visit USING btree (case_id, created_at)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "case_visit_case_id_fkey",
+     "tanim": "FOREIGN KEY (case_id) REFERENCES app.case_note(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "case_visit_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "case_visit_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "chat_turn": {
+   "kolon": [
+    {
+     "ad": "turn",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "durum",
+     "tip": "text",
+     "null": false,
+     "vars": "'uretiliyor'::text",
+     "sira": 3
+    },
+    {
+     "ad": "thread_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "message_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 6
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 7
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "chat_turn_created_idx",
+     "tanim": "CREATE INDEX chat_turn_created_idx ON app.chat_turn USING btree (created_at)"
+    },
+    {
+     "ad": "chat_turn_pkey",
+     "tanim": "CREATE UNIQUE INDEX chat_turn_pkey ON app.chat_turn USING btree (turn)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "chat_turn_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "chat_turn_pkey",
+     "tanim": "PRIMARY KEY (turn)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "cihaz_eslesme": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.cihaz_eslesme_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "istek_ozet",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "kod",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "cihaz_sir_ozet",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "cihaz_ad",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "durum",
+     "tip": "text",
+     "null": false,
+     "vars": "'bekliyor'::text",
+     "sira": 7
+    },
+    {
+     "ad": "istek_ip",
+     "tip": "inet",
+     "null": true,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 9
+    },
+    {
+     "ad": "onay_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 10
+    },
+    {
+     "ad": "son_kullanim",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 11
+    },
+    {
+     "ad": "expires_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "",
+     "sira": 12
+    },
+    {
+     "ad": "cihaz_expires_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 13
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "cihaz_doctor_idx",
+     "tanim": "CREATE INDEX cihaz_doctor_idx ON app.cihaz_eslesme USING btree (doctor_id)"
+    },
+    {
+     "ad": "cihaz_eslesme_pkey",
+     "tanim": "CREATE UNIQUE INDEX cihaz_eslesme_pkey ON app.cihaz_eslesme USING btree (id)"
+    },
+    {
+     "ad": "cihaz_kod_uq",
+     "tanim": "CREATE UNIQUE INDEX cihaz_kod_uq ON app.cihaz_eslesme USING btree (kod) WHERE (kod IS NOT NULL)"
+    },
+    {
+     "ad": "cihaz_sir_uq",
+     "tanim": "CREATE UNIQUE INDEX cihaz_sir_uq ON app.cihaz_eslesme USING btree (cihaz_sir_ozet) WHERE (cihaz_sir_ozet IS NOT NULL)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "cihaz_eslesme_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "cihaz_eslesme_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "doctor": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.doctor_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "email",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "password_hash",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "full_name",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "specialty",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "diploma_no",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "verification_status",
+     "tip": "text",
+     "null": false,
+     "vars": "'pending'::text",
+     "sira": 7
+    },
+    {
+     "ad": "plan",
+     "tip": "text",
+     "null": false,
+     "vars": "'trial'::text",
+     "sira": 8
+    },
+    {
+     "ad": "monthly_quota",
+     "tip": "integer",
+     "null": false,
+     "vars": "15",
+     "sira": 9
+    },
+    {
+     "ad": "role",
+     "tip": "text",
+     "null": false,
+     "vars": "'doctor'::text",
+     "sira": 10
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 11
+    },
+    {
+     "ad": "stripe_customer_id",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 12
+    },
+    {
+     "ad": "stripe_subscription_id",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 13
+    },
+    {
+     "ad": "subscription_status",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 14
+    },
+    {
+     "ad": "current_period_end",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 15
+    },
+    {
+     "ad": "signup_ip",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 16
+    },
+    {
+     "ad": "unvan",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 17
+    },
+    {
+     "ad": "kurum",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 18
+    },
+    {
+     "ad": "phone",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 19
+    },
+    {
+     "ad": "email_verified",
+     "tip": "boolean",
+     "null": false,
+     "vars": "false",
+     "sira": 20
+    },
+    {
+     "ad": "verify_token",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 21
+    },
+    {
+     "ad": "verify_sent_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 22
+    },
+    {
+     "ad": "topup_balance",
+     "tip": "integer",
+     "null": false,
+     "vars": "0",
+     "sira": 23
+    },
+    {
+     "ad": "deletion_requested_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 24
+    },
+    {
+     "ad": "consents",
+     "tip": "jsonb",
+     "null": true,
+     "vars": "",
+     "sira": 25
+    },
+    {
+     "ad": "billing",
+     "tip": "jsonb",
+     "null": true,
+     "vars": "",
+     "sira": 26
+    },
+    {
+     "ad": "referral_code",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 27
+    },
+    {
+     "ad": "signup_source",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 28
+    },
+    {
+     "ad": "gift_balance",
+     "tip": "integer",
+     "null": false,
+     "vars": "0",
+     "sira": 29
+    },
+    {
+     "ad": "gclid",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 30
+    },
+    {
+     "ad": "gclid_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 31
+    },
+    {
+     "ad": "reset_token",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 32
+    },
+    {
+     "ad": "reset_sent_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 33
+    },
+    {
+     "ad": "last_login_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 34
+    },
+    {
+     "ad": "is_test",
+     "tip": "boolean",
+     "null": false,
+     "vars": "false",
+     "sira": 35
+    },
+    {
+     "ad": "birth_date",
+     "tip": "date",
+     "null": true,
+     "vars": "",
+     "sira": 36
+    },
+    {
+     "ad": "first_q_mail_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 37
+    },
+    {
+     "ad": "country",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 38
+    },
+    {
+     "ad": "city",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 39
+    },
+    {
+     "ad": "mail_opt_out",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 40
+    },
+    {
+     "ad": "deneme_gun",
+     "tip": "integer",
+     "null": false,
+     "vars": "15",
+     "sira": 41
+    },
+    {
+     "ad": "yenileme_uyari_donem",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 42
+    },
+    {
+     "ad": "yenileme_bitis_donem",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 43
+    },
+    {
+     "ad": "iyzico_customer_ref",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 44
+    },
+    {
+     "ad": "iyzico_subscription_ref",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 45
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "doctor_created_idx",
+     "tanim": "CREATE INDEX doctor_created_idx ON app.doctor USING btree (created_at DESC)"
+    },
+    {
+     "ad": "doctor_deletion_idx",
+     "tanim": "CREATE INDEX doctor_deletion_idx ON app.doctor USING btree (deletion_requested_at) WHERE (deletion_requested_at IS NOT NULL)"
+    },
+    {
+     "ad": "doctor_email_key",
+     "tanim": "CREATE UNIQUE INDEX doctor_email_key ON app.doctor USING btree (email)"
+    },
+    {
+     "ad": "doctor_iyz_sub_idx",
+     "tanim": "CREATE INDEX doctor_iyz_sub_idx ON app.doctor USING btree (iyzico_subscription_ref) WHERE (iyzico_subscription_ref IS NOT NULL)"
+    },
+    {
+     "ad": "doctor_last_login_idx",
+     "tanim": "CREATE INDEX doctor_last_login_idx ON app.doctor USING btree (last_login_at DESC NULLS LAST)"
+    },
+    {
+     "ad": "doctor_mail_opt_out_idx",
+     "tanim": "CREATE INDEX doctor_mail_opt_out_idx ON app.doctor USING btree (mail_opt_out) WHERE (mail_opt_out IS NOT NULL)"
+    },
+    {
+     "ad": "doctor_period_end_idx",
+     "tanim": "CREATE INDEX doctor_period_end_idx ON app.doctor USING btree (current_period_end) WHERE (current_period_end IS NOT NULL)"
+    },
+    {
+     "ad": "doctor_pkey",
+     "tanim": "CREATE UNIQUE INDEX doctor_pkey ON app.doctor USING btree (id)"
+    },
+    {
+     "ad": "doctor_referral_code_uq",
+     "tanim": "CREATE UNIQUE INDEX doctor_referral_code_uq ON app.doctor USING btree (referral_code) WHERE (referral_code IS NOT NULL)"
+    },
+    {
+     "ad": "doctor_reset_token_idx",
+     "tanim": "CREATE INDEX doctor_reset_token_idx ON app.doctor USING btree (reset_token) WHERE (reset_token IS NOT NULL)"
+    },
+    {
+     "ad": "doctor_signup_ip_idx",
+     "tanim": "CREATE INDEX doctor_signup_ip_idx ON app.doctor USING btree (signup_ip, created_at)"
+    },
+    {
+     "ad": "doctor_verify_token_idx",
+     "tanim": "CREATE INDEX doctor_verify_token_idx ON app.doctor USING btree (verify_token) WHERE (verify_token IS NOT NULL)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "doctor_email_key",
+     "tanim": "UNIQUE (email)",
+     "tip": "u"
+    },
+    {
+     "ad": "doctor_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "doctor_archive": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.doctor_archive_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "email",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "full_name",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "reason",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "snapshot",
+     "tip": "jsonb",
+     "null": false,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "deleted_by",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "deleted_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 8
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "doctor_archive_email_idx",
+     "tanim": "CREATE INDEX doctor_archive_email_idx ON app.doctor_archive USING btree (email)"
+    },
+    {
+     "ad": "doctor_archive_pkey",
+     "tanim": "CREATE UNIQUE INDEX doctor_archive_pkey ON app.doctor_archive USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "doctor_archive_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "doctor_event": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.doctor_event_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "yuzey",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "detay",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "doctor_event_created_idx",
+     "tanim": "CREATE INDEX doctor_event_created_idx ON app.doctor_event USING btree (created_at)"
+    },
+    {
+     "ad": "doctor_event_doctor_idx",
+     "tanim": "CREATE INDEX doctor_event_doctor_idx ON app.doctor_event USING btree (doctor_id, created_at DESC)"
+    },
+    {
+     "ad": "doctor_event_pkey",
+     "tanim": "CREATE UNIQUE INDEX doctor_event_pkey ON app.doctor_event USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "doctor_event_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "doctor_event_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "evidence_doc": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.evidence_doc_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "message_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "sira",
+     "tip": "smallint",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "source",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "doc_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "baslik",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "skor",
+     "tip": "real",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 8
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "evidence_doc_doc_idx",
+     "tanim": "CREATE INDEX evidence_doc_doc_idx ON app.evidence_doc USING btree (source, doc_id)"
+    },
+    {
+     "ad": "evidence_doc_msg_idx",
+     "tanim": "CREATE INDEX evidence_doc_msg_idx ON app.evidence_doc USING btree (message_id)"
+    },
+    {
+     "ad": "evidence_doc_pkey",
+     "tanim": "CREATE UNIQUE INDEX evidence_doc_pkey ON app.evidence_doc USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "evidence_doc_message_id_fkey",
+     "tanim": "FOREIGN KEY (message_id) REFERENCES app.message(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "evidence_doc_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "feedback": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.feedback_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "category",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "message",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "page",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "status",
+     "tip": "text",
+     "null": false,
+     "vars": "'new'::text",
+     "sira": 6
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 7
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "feedback_created_idx",
+     "tanim": "CREATE INDEX feedback_created_idx ON app.feedback USING btree (created_at DESC)"
+    },
+    {
+     "ad": "feedback_doctor_idx",
+     "tanim": "CREATE INDEX feedback_doctor_idx ON app.feedback USING btree (doctor_id)"
+    },
+    {
+     "ad": "feedback_pkey",
+     "tanim": "CREATE UNIQUE INDEX feedback_pkey ON app.feedback USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "feedback_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "feedback_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "iyzico_payment": {
+   "kolon": [
+    {
+     "ad": "token",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "kind",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "plan",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "interval",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "credits",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "amount",
+     "tip": "numeric",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "payment_id",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "granted",
+     "tip": "boolean",
+     "null": false,
+     "vars": "false",
+     "sira": 9
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 10
+    },
+    {
+     "ad": "fail_info",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 11
+    },
+    {
+     "ad": "subscription_ref",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 12
+    },
+    {
+     "ad": "order_ref",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 13
+    },
+    {
+     "ad": "period_end",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 14
+    },
+    {
+     "ad": "iyz_status",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 15
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "iyzico_payment_created_idx",
+     "tanim": "CREATE INDEX iyzico_payment_created_idx ON app.iyzico_payment USING btree (created_at DESC)"
+    },
+    {
+     "ad": "iyzico_payment_doctor_idx",
+     "tanim": "CREATE INDEX iyzico_payment_doctor_idx ON app.iyzico_payment USING btree (doctor_id)"
+    },
+    {
+     "ad": "iyzico_payment_order_idx",
+     "tanim": "CREATE INDEX iyzico_payment_order_idx ON app.iyzico_payment USING btree (order_ref) WHERE (order_ref IS NOT NULL)"
+    },
+    {
+     "ad": "iyzico_payment_pending_idx",
+     "tanim": "CREATE INDEX iyzico_payment_pending_idx ON app.iyzico_payment USING btree (created_at DESC) WHERE (NOT granted)"
+    },
+    {
+     "ad": "iyzico_payment_pkey",
+     "tanim": "CREATE UNIQUE INDEX iyzico_payment_pkey ON app.iyzico_payment USING btree (token)"
+    },
+    {
+     "ad": "iyzico_payment_sub_idx",
+     "tanim": "CREATE INDEX iyzico_payment_sub_idx ON app.iyzico_payment USING btree (subscription_ref) WHERE (subscription_ref IS NOT NULL)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "iyzico_payment_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "iyzico_payment_pkey",
+     "tanim": "PRIMARY KEY (token)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "login_event": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.login_event_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "login_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 3
+    },
+    {
+     "ad": "last_seen",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 4
+    },
+    {
+     "ad": "logout_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "login_event_doctor_idx",
+     "tanim": "CREATE INDEX login_event_doctor_idx ON app.login_event USING btree (doctor_id, login_at DESC)"
+    },
+    {
+     "ad": "login_event_pkey",
+     "tanim": "CREATE UNIQUE INDEX login_event_pkey ON app.login_event USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "login_event_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "login_event_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "message": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.message_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "thread_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "role",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "content",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "sources",
+     "tip": "jsonb",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "mode",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "cost_usd",
+     "tip": "numeric",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 8
+    },
+    {
+     "ad": "notice",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 9
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "message_pkey",
+     "tanim": "CREATE UNIQUE INDEX message_pkey ON app.message USING btree (id)"
+    },
+    {
+     "ad": "message_role_created_idx",
+     "tanim": "CREATE INDEX message_role_created_idx ON app.message USING btree (role, created_at)"
+    },
+    {
+     "ad": "message_thread_idx",
+     "tanim": "CREATE INDEX message_thread_idx ON app.message USING btree (thread_id)"
+    },
+    {
+     "ad": "message_thread_role_idx",
+     "tanim": "CREATE INDEX message_thread_role_idx ON app.message USING btree (thread_id, role, id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "message_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    },
+    {
+     "ad": "message_thread_id_fkey",
+     "tanim": "FOREIGN KEY (thread_id) REFERENCES app.thread(id) ON DELETE CASCADE",
+     "tip": "f"
+    }
+   ],
+   "yorum": ""
+  },
+  "query_stat": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.query_stat_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "created",
+     "tip": "date",
+     "null": false,
+     "vars": "CURRENT_DATE",
+     "sira": 2
+    },
+    {
+     "ad": "lang",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "mode",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "sourced",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "refused",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "source_kinds",
+     "tip": "ARRAY",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "topic",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 8
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "query_stat_created_idx",
+     "tanim": "CREATE INDEX query_stat_created_idx ON app.query_stat USING btree (created)"
+    },
+    {
+     "ad": "query_stat_pkey",
+     "tanim": "CREATE UNIQUE INDEX query_stat_pkey ON app.query_stat USING btree (id)"
+    },
+    {
+     "ad": "query_stat_topic_idx",
+     "tanim": "CREATE INDEX query_stat_topic_idx ON app.query_stat USING btree (topic)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "query_stat_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "question_insight": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.question_insight_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "message_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "soruldu_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "brans",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "unvan",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "sehir",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "konu",
+     "tip": "ARRAY",
+     "null": false,
+     "vars": "'{}'::text[]",
+     "sira": 7
+    },
+    {
+     "ad": "icd_bolum",
+     "tip": "ARRAY",
+     "null": false,
+     "vars": "'{}'::text[]",
+     "sira": 8
+    },
+    {
+     "ad": "soru_tipi",
+     "tip": "ARRAY",
+     "null": false,
+     "vars": "'{}'::text[]",
+     "sira": 9
+    },
+    {
+     "ad": "ilaclar",
+     "tip": "ARRAY",
+     "null": false,
+     "vars": "'{}'::text[]",
+     "sira": 10
+    },
+    {
+     "ad": "kanit_bos",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 11
+    },
+    {
+     "ad": "kanit_n",
+     "tip": "smallint",
+     "null": true,
+     "vars": "",
+     "sira": 12
+    },
+    {
+     "ad": "kanit_turleri",
+     "tip": "ARRAY",
+     "null": true,
+     "vars": "",
+     "sira": 13
+    },
+    {
+     "ad": "atif_var",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 14
+    },
+    {
+     "ad": "red",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 15
+    },
+    {
+     "ad": "iskelet_tam",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 16
+    },
+    {
+     "ad": "hasta_baglami",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 17
+    },
+    {
+     "ad": "ek_dosya",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 18
+    },
+    {
+     "ad": "dil",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 19
+    },
+    {
+     "ad": "uzunluk",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 20
+    },
+    {
+     "ad": "tur_sirasi",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 21
+    },
+    {
+     "ad": "mod",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 22
+    },
+    {
+     "ad": "yontem",
+     "tip": "text",
+     "null": false,
+     "vars": "'kural'::text",
+     "sira": 23
+    },
+    {
+     "ad": "uretim_surumu",
+     "tip": "smallint",
+     "null": false,
+     "vars": "1",
+     "sira": 24
+    },
+    {
+     "ad": "uretildi_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 25
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "question_insight_brans_idx",
+     "tanim": "CREATE INDEX question_insight_brans_idx ON app.question_insight USING btree (brans)"
+    },
+    {
+     "ad": "question_insight_konu_idx",
+     "tanim": "CREATE INDEX question_insight_konu_idx ON app.question_insight USING gin (konu)"
+    },
+    {
+     "ad": "question_insight_message_id_key",
+     "tanim": "CREATE UNIQUE INDEX question_insight_message_id_key ON app.question_insight USING btree (message_id)"
+    },
+    {
+     "ad": "question_insight_pkey",
+     "tanim": "CREATE UNIQUE INDEX question_insight_pkey ON app.question_insight USING btree (id)"
+    },
+    {
+     "ad": "question_insight_zaman_idx",
+     "tanim": "CREATE INDEX question_insight_zaman_idx ON app.question_insight USING btree (soruldu_at)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "question_insight_kanit_ck",
+     "tanim": "CHECK (((kanit_bos IS NULL) OR (kanit_n IS NOT NULL)))",
+     "tip": "c"
+    },
+    {
+     "ad": "question_insight_message_id_fkey",
+     "tanim": "FOREIGN KEY (message_id) REFERENCES app.message(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "question_insight_message_id_key",
+     "tanim": "UNIQUE (message_id)",
+     "tip": "u"
+    },
+    {
+     "ad": "question_insight_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    },
+    {
+     "ad": "question_insight_tur_ck",
+     "tanim": "CHECK (((tur_sirasi IS NULL) OR (tur_sirasi = ANY (ARRAY['ilk'::text, 'takip'::text]))))",
+     "tip": "c"
+    },
+    {
+     "ad": "question_insight_yontem_ck",
+     "tanim": "CHECK ((yontem = ANY (ARRAY['kural'::text, 'llm'::text, 'kural+llm'::text])))",
+     "tip": "c"
+    }
+   ],
+   "yorum": ""
+  },
+  "question_kept": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.question_kept_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "asked_at",
+     "tip": "date",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "lang",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "mode",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "question",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "answer",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "sourced",
+     "tip": "boolean",
+     "null": false,
+     "vars": "false",
+     "sira": 7
+    },
+    {
+     "ad": "source_kinds",
+     "tip": "ARRAY",
+     "null": true,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "kept_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 9
+    },
+    {
+     "ad": "kept_reason",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 10
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "question_kept_asked_idx",
+     "tanim": "CREATE INDEX question_kept_asked_idx ON app.question_kept USING btree (asked_at DESC)"
+    },
+    {
+     "ad": "question_kept_pkey",
+     "tanim": "CREATE UNIQUE INDEX question_kept_pkey ON app.question_kept USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "question_kept_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "referral": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.referral_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "referrer_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "referred_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "status",
+     "tip": "text",
+     "null": false,
+     "vars": "'pending'::text",
+     "sira": 4
+    },
+    {
+     "ad": "referrer_reward",
+     "tip": "integer",
+     "null": false,
+     "vars": "0",
+     "sira": 5
+    },
+    {
+     "ad": "referred_reward",
+     "tip": "integer",
+     "null": false,
+     "vars": "0",
+     "sira": 6
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 7
+    },
+    {
+     "ad": "rewarded_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 8
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "referral_pkey",
+     "tanim": "CREATE UNIQUE INDEX referral_pkey ON app.referral USING btree (id)"
+    },
+    {
+     "ad": "referral_referred_id_key",
+     "tanim": "CREATE UNIQUE INDEX referral_referred_id_key ON app.referral USING btree (referred_id)"
+    },
+    {
+     "ad": "referral_referrer_idx",
+     "tanim": "CREATE INDEX referral_referrer_idx ON app.referral USING btree (referrer_id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "referral_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    },
+    {
+     "ad": "referral_referred_id_fkey",
+     "tanim": "FOREIGN KEY (referred_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "referral_referred_id_key",
+     "tanim": "UNIQUE (referred_id)",
+     "tip": "u"
+    },
+    {
+     "ad": "referral_referrer_id_fkey",
+     "tanim": "FOREIGN KEY (referrer_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    }
+   ],
+   "yorum": ""
+  },
+  "referral_invite": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.referral_invite_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "referrer_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "email",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "joined",
+     "tip": "boolean",
+     "null": false,
+     "vars": "false",
+     "sira": 4
+    },
+    {
+     "ad": "sent_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "referral_invite_email_idx",
+     "tanim": "CREATE INDEX referral_invite_email_idx ON app.referral_invite USING btree (lower(email))"
+    },
+    {
+     "ad": "referral_invite_pkey",
+     "tanim": "CREATE UNIQUE INDEX referral_invite_pkey ON app.referral_invite USING btree (id)"
+    },
+    {
+     "ad": "referral_invite_referrer_id_email_key",
+     "tanim": "CREATE UNIQUE INDEX referral_invite_referrer_id_email_key ON app.referral_invite USING btree (referrer_id, email)"
+    },
+    {
+     "ad": "referral_invite_referrer_idx",
+     "tanim": "CREATE INDEX referral_invite_referrer_idx ON app.referral_invite USING btree (referrer_id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "referral_invite_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    },
+    {
+     "ad": "referral_invite_referrer_id_email_key",
+     "tanim": "UNIQUE (referrer_id, email)",
+     "tip": "u"
+    },
+    {
+     "ad": "referral_invite_referrer_id_fkey",
+     "tanim": "FOREIGN KEY (referrer_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    }
+   ],
+   "yorum": ""
+  },
+  "reservation_settled": {
+   "kolon": [
+    {
+     "ad": "rid",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "kind",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "topup",
+     "tip": "integer",
+     "null": false,
+     "vars": "0",
+     "sira": 4
+    },
+    {
+     "ad": "gift",
+     "tip": "integer",
+     "null": false,
+     "vars": "0",
+     "sira": 5
+    },
+    {
+     "ad": "ts",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 6
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "reservation_settled_pkey",
+     "tanim": "CREATE UNIQUE INDEX reservation_settled_pkey ON app.reservation_settled USING btree (rid)"
+    },
+    {
+     "ad": "reservation_settled_ts_idx",
+     "tanim": "CREATE INDEX reservation_settled_ts_idx ON app.reservation_settled USING btree (ts)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "reservation_settled_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "reservation_settled_pkey",
+     "tanim": "PRIMARY KEY (rid)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "schema_migration": {
+   "kolon": [
+    {
+     "ad": "file",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "stmt_hash",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "ord",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "snippet",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "applied_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "schema_migration_pkey",
+     "tanim": "CREATE UNIQUE INDEX schema_migration_pkey ON app.schema_migration USING btree (file, stmt_hash)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "schema_migration_pkey",
+     "tanim": "PRIMARY KEY (file, stmt_hash)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "session": {
+   "kolon": [
+    {
+     "ad": "token",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 3
+    },
+    {
+     "ad": "expires_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "last_seen",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    },
+    {
+     "ad": "login_event_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "cihaz_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "session_doctor_idx",
+     "tanim": "CREATE INDEX session_doctor_idx ON app.session USING btree (doctor_id)"
+    },
+    {
+     "ad": "session_pkey",
+     "tanim": "CREATE UNIQUE INDEX session_pkey ON app.session USING btree (token)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "session_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "session_pkey",
+     "tanim": "PRIMARY KEY (token)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "setting": {
+   "kolon": [
+    {
+     "ad": "key",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "value",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 3
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "setting_pkey",
+     "tanim": "CREATE UNIQUE INDEX setting_pkey ON app.setting USING btree (key)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "setting_pkey",
+     "tanim": "PRIMARY KEY (key)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "thread": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.thread_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "title",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "case_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    },
+    {
+     "ad": "title_auto",
+     "tip": "boolean",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "thread_doctor_created_idx",
+     "tanim": "CREATE INDEX thread_doctor_created_idx ON app.thread USING btree (doctor_id, created_at DESC)"
+    },
+    {
+     "ad": "thread_doctor_idx",
+     "tanim": "CREATE INDEX thread_doctor_idx ON app.thread USING btree (doctor_id)"
+    },
+    {
+     "ad": "thread_pkey",
+     "tanim": "CREATE UNIQUE INDEX thread_pkey ON app.thread USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "thread_case_fk",
+     "tanim": "FOREIGN KEY (case_id) REFERENCES app.case_note(id) ON DELETE SET NULL",
+     "tip": "f"
+    },
+    {
+     "ad": "thread_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "thread_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "topup_grant": {
+   "kolon": [
+    {
+     "ad": "session_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "credits",
+     "tip": "integer",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "ts",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 4
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "topup_grant_pkey",
+     "tanim": "CREATE UNIQUE INDEX topup_grant_pkey ON app.topup_grant USING btree (session_id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "topup_grant_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "topup_grant_pkey",
+     "tanim": "PRIMARY KEY (session_id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "tr_cache": {
+   "kolon": [
+    {
+     "ad": "src_hash",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "lang",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "translated",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "model",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "tr_cache_pkey",
+     "tanim": "CREATE UNIQUE INDEX tr_cache_pkey ON app.tr_cache USING btree (src_hash, lang)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "tr_cache_pkey",
+     "tanim": "PRIMARY KEY (src_hash, lang)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "trial_used": {
+   "kolon": [
+    {
+     "ad": "email_hash",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "claimed_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 2
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "trial_used_pkey",
+     "tanim": "CREATE UNIQUE INDEX trial_used_pkey ON app.trial_used USING btree (email_hash)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "trial_used_pkey",
+     "tanim": "PRIMARY KEY (email_hash)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "usage": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('app.usage_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "doctor_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "ts",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 3
+    },
+    {
+     "ad": "mode",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "input_tokens",
+     "tip": "integer",
+     "null": true,
+     "vars": "0",
+     "sira": 5
+    },
+    {
+     "ad": "output_tokens",
+     "tip": "integer",
+     "null": true,
+     "vars": "0",
+     "sira": 6
+    },
+    {
+     "ad": "cache_read",
+     "tip": "integer",
+     "null": true,
+     "vars": "0",
+     "sira": 7
+    },
+    {
+     "ad": "cache_write",
+     "tip": "integer",
+     "null": true,
+     "vars": "0",
+     "sira": 8
+    },
+    {
+     "ad": "usd",
+     "tip": "numeric",
+     "null": true,
+     "vars": "0",
+     "sira": 9
+    },
+    {
+     "ad": "credits",
+     "tip": "smallint",
+     "null": false,
+     "vars": "1",
+     "sira": 10
+    },
+    {
+     "ad": "topup",
+     "tip": "smallint",
+     "null": false,
+     "vars": "0",
+     "sira": 11
+    },
+    {
+     "ad": "gift",
+     "tip": "smallint",
+     "null": false,
+     "vars": "0",
+     "sira": 12
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "usage_doctor_ts_idx",
+     "tanim": "CREATE INDEX usage_doctor_ts_idx ON app.usage USING btree (doctor_id, ts)"
+    },
+    {
+     "ad": "usage_pkey",
+     "tanim": "CREATE UNIQUE INDEX usage_pkey ON app.usage USING btree (id)"
+    },
+    {
+     "ad": "usage_ts_idx",
+     "tanim": "CREATE INDEX usage_ts_idx ON app.usage USING btree (ts)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "usage_doctor_id_fkey",
+     "tanim": "FOREIGN KEY (doctor_id) REFERENCES app.doctor(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "usage_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "wall_stat": {
+   "kolon": [
+    {
+     "ad": "gun",
+     "tip": "date",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "olay",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "yuzey",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "n",
+     "tip": "bigint",
+     "null": false,
+     "vars": "0",
+     "sira": 4
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "wall_stat_pkey",
+     "tanim": "CREATE UNIQUE INDEX wall_stat_pkey ON app.wall_stat USING btree (gun, olay, yuzey)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "wall_stat_pkey",
+     "tanim": "PRIMARY KEY (gun, olay, yuzey)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  }
+ },
+ "core": {
+  "adverse_event": {
+   "kolon": [
+    {
+     "ad": "generic_name",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "reaction",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "report_count",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "adverse_event_generic_trgm",
+     "tanim": "CREATE INDEX adverse_event_generic_trgm ON core.adverse_event USING gin (generic_name gin_trgm_ops)"
+    },
+    {
+     "ad": "adverse_event_pkey",
+     "tanim": "CREATE UNIQUE INDEX adverse_event_pkey ON core.adverse_event USING btree (generic_name, reaction)"
+    },
+    {
+     "ad": "idx_ae_generic",
+     "tanim": "CREATE INDEX idx_ae_generic ON core.adverse_event USING btree (generic_name)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "adverse_event_pkey",
+     "tanim": "PRIMARY KEY (generic_name, reaction)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "code_map": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "entity_type",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "entity_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "system",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "code",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "code_map_entity_type_entity_id_system_code_key",
+     "tanim": "CREATE UNIQUE INDEX code_map_entity_type_entity_id_system_code_key ON core.code_map USING btree (entity_type, entity_id, system, code)"
+    },
+    {
+     "ad": "code_map_pkey",
+     "tanim": "CREATE UNIQUE INDEX code_map_pkey ON core.code_map USING btree (id)"
+    },
+    {
+     "ad": "idx_codemap_lookup",
+     "tanim": "CREATE INDEX idx_codemap_lookup ON core.code_map USING btree (system, code)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "code_map_entity_type_entity_id_system_code_key",
+     "tanim": "UNIQUE (entity_type, entity_id, system, code)",
+     "tip": "u"
+    },
+    {
+     "ad": "code_map_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "corpus": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "source",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "doc_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "title",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "body",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "license",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 7
+    },
+    {
+     "ad": "tsv",
+     "tip": "tsvector",
+     "null": true,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "retraction_status",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 9
+    },
+    {
+     "ad": "retraction_checked_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 10
+    },
+    {
+     "ad": "retraction_source",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 11
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "corpus_pkey",
+     "tanim": "CREATE UNIQUE INDEX corpus_pkey ON core.corpus USING btree (id)"
+    },
+    {
+     "ad": "corpus_source_doc_id_key",
+     "tanim": "CREATE UNIQUE INDEX corpus_source_doc_id_key ON core.corpus USING btree (source, doc_id)"
+    },
+    {
+     "ad": "corpus_tsv_gin",
+     "tanim": "CREATE INDEX corpus_tsv_gin ON core.corpus USING gin (tsv)"
+    },
+    {
+     "ad": "idx_corpus_retracted",
+     "tanim": "CREATE INDEX idx_corpus_retracted ON core.corpus USING btree (retraction_status) WHERE (retraction_status = 'retracted'::text)"
+    },
+    {
+     "ad": "idx_corpus_title_fts",
+     "tanim": "CREATE INDEX idx_corpus_title_fts ON core.corpus USING gin (to_tsvector('english'::regconfig, COALESCE(title, ''::text)))"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "corpus_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    },
+    {
+     "ad": "corpus_retraction_status_chk",
+     "tanim": "CHECK (((retraction_status IS NULL) OR (retraction_status = ANY (ARRAY['retracted'::text, 'unknown'::text, 'not_applicable'::text]))))",
+     "tip": "c"
+    },
+    {
+     "ad": "corpus_source_doc_id_key",
+     "tanim": "UNIQUE (source, doc_id)",
+     "tip": "u"
+    }
+   ],
+   "yorum": ""
+  },
+  "corpus_disease": {
+   "kolon": [
+    {
+     "ad": "corpus_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "disease_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "method",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "corpus_disease_pkey",
+     "tanim": "CREATE UNIQUE INDEX corpus_disease_pkey ON core.corpus_disease USING btree (corpus_id, disease_id, method)"
+    },
+    {
+     "ad": "idx_cd_disease",
+     "tanim": "CREATE INDEX idx_cd_disease ON core.corpus_disease USING btree (disease_id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "corpus_disease_corpus_id_fkey",
+     "tanim": "FOREIGN KEY (corpus_id) REFERENCES core.corpus(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "corpus_disease_disease_id_fkey",
+     "tanim": "FOREIGN KEY (disease_id) REFERENCES core.disease(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "corpus_disease_pkey",
+     "tanim": "PRIMARY KEY (corpus_id, disease_id, method)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "corpus_pilot_yedek": {
+   "kolon": [
+    {
+     "ad": "corpus_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "doc_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "body",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "license",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "alindi_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "corpus_pilot_yedek_pkey",
+     "tanim": "CREATE UNIQUE INDEX corpus_pilot_yedek_pkey ON core.corpus_pilot_yedek USING btree (corpus_id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "corpus_pilot_yedek_pkey",
+     "tanim": "PRIMARY KEY (corpus_id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "disease": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "icd11_code",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "title",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "definition",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "parent_uri",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "uri",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "source_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "source_key",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 9
+    },
+    {
+     "ad": "title_tr",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 10
+    },
+    {
+     "ad": "class_kind",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 11
+    },
+    {
+     "ad": "parent_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 12
+    },
+    {
+     "ad": "synonyms",
+     "tip": "ARRAY",
+     "null": true,
+     "vars": "",
+     "sira": 13
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "disease_pkey",
+     "tanim": "CREATE UNIQUE INDEX disease_pkey ON core.disease USING btree (id)"
+    },
+    {
+     "ad": "disease_source_id_source_key_key",
+     "tanim": "CREATE UNIQUE INDEX disease_source_id_source_key_key ON core.disease USING btree (source_id, source_key)"
+    },
+    {
+     "ad": "disease_uri_key",
+     "tanim": "CREATE UNIQUE INDEX disease_uri_key ON core.disease USING btree (uri)"
+    },
+    {
+     "ad": "idx_disease_code",
+     "tanim": "CREATE INDEX idx_disease_code ON core.disease USING btree (icd11_code)"
+    },
+    {
+     "ad": "idx_disease_parent",
+     "tanim": "CREATE INDEX idx_disease_parent ON core.disease USING btree (parent_id)"
+    },
+    {
+     "ad": "idx_disease_title",
+     "tanim": "CREATE INDEX idx_disease_title ON core.disease USING btree (lower(title))"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "disease_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    },
+    {
+     "ad": "disease_source_id_source_key_key",
+     "tanim": "UNIQUE (source_id, source_key)",
+     "tip": "u"
+    },
+    {
+     "ad": "disease_uri_key",
+     "tanim": "UNIQUE (uri)",
+     "tip": "u"
+    }
+   ],
+   "yorum": ""
+  },
+  "drug": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "generic_name",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "brand_names",
+     "tip": "ARRAY",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "manufacturer",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "indications",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "warnings",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "source_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "source_key",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 9
+    },
+    {
+     "ad": "interactions",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 10
+    },
+    {
+     "ad": "contraindications",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 11
+    },
+    {
+     "ad": "dosage",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 12
+    },
+    {
+     "ad": "boxed_warning",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 13
+    },
+    {
+     "ad": "adverse_reactions",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 14
+    },
+    {
+     "ad": "label_date",
+     "tip": "date",
+     "null": true,
+     "vars": "",
+     "sira": 15
+    },
+    {
+     "ad": "label_date_kind",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 16
+    },
+    {
+     "ad": "label_version",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 17
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "drug_brands_trgm",
+     "tanim": "CREATE INDEX drug_brands_trgm ON core.drug USING gin (core.brands_text(brand_names) gin_trgm_ops)"
+    },
+    {
+     "ad": "drug_brands_trgm_ccnew",
+     "tanim": "CREATE INDEX drug_brands_trgm_ccnew ON core.drug USING gin (core.brands_text(brand_names) gin_trgm_ops)"
+    },
+    {
+     "ad": "drug_generic_trgm",
+     "tanim": "CREATE INDEX drug_generic_trgm ON core.drug USING gin (generic_name gin_trgm_ops)"
+    },
+    {
+     "ad": "drug_pkey",
+     "tanim": "CREATE UNIQUE INDEX drug_pkey ON core.drug USING btree (id)"
+    },
+    {
+     "ad": "drug_source_id_source_key_key",
+     "tanim": "CREATE UNIQUE INDEX drug_source_id_source_key_key ON core.drug USING btree (source_id, source_key)"
+    },
+    {
+     "ad": "idx_drug_generic",
+     "tanim": "CREATE INDEX idx_drug_generic ON core.drug USING btree (lower(generic_name))"
+    },
+    {
+     "ad": "idx_drug_ind_fts",
+     "tanim": "CREATE INDEX idx_drug_ind_fts ON core.drug USING gin (to_tsvector('english'::regconfig, COALESCE(indications, ''::text)))"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "drug_label_date_kind_ck",
+     "tanim": "CHECK ((((label_date IS NULL) = (label_date_kind IS NULL)) AND ((label_date_kind IS NULL) OR (label_date_kind = ANY (ARRAY['yururluk'::text, 'yayim'::text, 'onay'::text]))))) NOT VALID",
+     "tip": "c"
+    },
+    {
+     "ad": "drug_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    },
+    {
+     "ad": "drug_source_id_source_key_key",
+     "tanim": "UNIQUE (source_id, source_key)",
+     "tip": "u"
+    }
+   ],
+   "yorum": ""
+  },
+  "drug_class_cache": {
+   "kolon": [
+    {
+     "ad": "query_norm",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "atc",
+     "tip": "ARRAY",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "moa",
+     "tip": "ARRAY",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "rxcui",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "drug_class_cache_pkey",
+     "tanim": "CREATE UNIQUE INDEX drug_class_cache_pkey ON core.drug_class_cache USING btree (query_norm)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "drug_class_cache_pkey",
+     "tanim": "PRIMARY KEY (query_norm)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "drug_disease": {
+   "kolon": [
+    {
+     "ad": "drug_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "disease_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "method",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "confidence",
+     "tip": "real",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "created_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "drug_disease_pkey",
+     "tanim": "CREATE UNIQUE INDEX drug_disease_pkey ON core.drug_disease USING btree (drug_id, disease_id, method)"
+    },
+    {
+     "ad": "idx_dd_disease",
+     "tanim": "CREATE INDEX idx_dd_disease ON core.drug_disease USING btree (disease_id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "drug_disease_disease_id_fkey",
+     "tanim": "FOREIGN KEY (disease_id) REFERENCES core.disease(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "drug_disease_drug_id_fkey",
+     "tanim": "FOREIGN KEY (drug_id) REFERENCES core.drug(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "drug_disease_pkey",
+     "tanim": "PRIMARY KEY (drug_id, disease_id, method)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "drug_recall": {
+   "kolon": [
+    {
+     "ad": "recall_number",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "generic_name",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "brand_name",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "product_desc",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "reason",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "classification",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "status",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "recalling_firm",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "initiated_date",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 9
+    },
+    {
+     "ad": "source_id",
+     "tip": "text",
+     "null": false,
+     "vars": "'enforcement'::text",
+     "sira": 10
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 11
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "drug_recall_pkey",
+     "tanim": "CREATE UNIQUE INDEX drug_recall_pkey ON core.drug_recall USING btree (recall_number)"
+    },
+    {
+     "ad": "idx_recall_generic",
+     "tanim": "CREATE INDEX idx_recall_generic ON core.drug_recall USING btree (lower(generic_name))"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "drug_recall_pkey",
+     "tanim": "PRIMARY KEY (recall_number)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "faers_fetch": {
+   "kolon": [
+    {
+     "ad": "generic_name",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "status",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "n_reactions",
+     "tip": "integer",
+     "null": false,
+     "vars": "0",
+     "sira": 3
+    },
+    {
+     "ad": "fetched_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 4
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "faers_fetch_pkey",
+     "tanim": "CREATE UNIQUE INDEX faers_fetch_pkey ON core.faers_fetch USING btree (generic_name)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "faers_fetch_pkey",
+     "tanim": "PRIMARY KEY (generic_name)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "ingest_log": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "source_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "started_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 3
+    },
+    {
+     "ad": "finished_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "status",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "records",
+     "tip": "integer",
+     "null": false,
+     "vars": "0",
+     "sira": 6
+    },
+    {
+     "ad": "cursor_before",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "cursor_after",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "error",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 9
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "idx_ingest_log_source",
+     "tanim": "CREATE INDEX idx_ingest_log_source ON core.ingest_log USING btree (source_id, started_at DESC)"
+    },
+    {
+     "ad": "ingest_log_pkey",
+     "tanim": "CREATE UNIQUE INDEX ingest_log_pkey ON core.ingest_log USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "ingest_log_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "kub_extract": {
+   "kolon": [
+    {
+     "ad": "generic_key",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "generic_name",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "drug_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "kub_url",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "endikasyon",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "doz",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "kontrendikasyon",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "etkilesim",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "uyari",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 9
+    },
+    {
+     "ad": "onay",
+     "tip": "text",
+     "null": false,
+     "vars": "'pending'::text",
+     "sira": 10
+    },
+    {
+     "ad": "onaylayan",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 11
+    },
+    {
+     "ad": "onay_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 12
+    },
+    {
+     "ad": "model",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 13
+    },
+    {
+     "ad": "tokens_in",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 14
+    },
+    {
+     "ad": "tokens_out",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 15
+    },
+    {
+     "ad": "pdf_chars",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 16
+    },
+    {
+     "ad": "hata",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 17
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 18
+    },
+    {
+     "ad": "ham_cikti",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 19
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "idx_kub_hata",
+     "tanim": "CREATE INDEX idx_kub_hata ON core.kub_extract USING btree (hata) WHERE (hata IS NOT NULL)"
+    },
+    {
+     "ad": "idx_kub_onay",
+     "tanim": "CREATE INDEX idx_kub_onay ON core.kub_extract USING btree (onay)"
+    },
+    {
+     "ad": "kub_extract_pkey",
+     "tanim": "CREATE UNIQUE INDEX kub_extract_pkey ON core.kub_extract USING btree (generic_key)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "kub_extract_pkey",
+     "tanim": "PRIMARY KEY (generic_key)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "name_alias": {
+   "kolon": [
+    {
+     "ad": "query_norm",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "ingredient",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "rxcui",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "source",
+     "tip": "text",
+     "null": false,
+     "vars": "'rxnorm'::text",
+     "sira": 4
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "name_alias_pkey",
+     "tanim": "CREATE UNIQUE INDEX name_alias_pkey ON core.name_alias USING btree (query_norm)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "name_alias_pkey",
+     "tanim": "PRIMARY KEY (query_norm)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "retracted_pub": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "src_key",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "pmcid",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "pmid",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "doi",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "title",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "pub_year",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "source",
+     "tip": "text",
+     "null": false,
+     "vars": "'europepmc'::text",
+     "sira": 8
+    },
+    {
+     "ad": "first_seen",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 9
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "idx_retracted_pmcid",
+     "tanim": "CREATE INDEX idx_retracted_pmcid ON core.retracted_pub USING btree (pmcid) WHERE (pmcid IS NOT NULL)"
+    },
+    {
+     "ad": "retracted_pub_pkey",
+     "tanim": "CREATE UNIQUE INDEX retracted_pub_pkey ON core.retracted_pub USING btree (id)"
+    },
+    {
+     "ad": "retracted_pub_source_src_key_key",
+     "tanim": "CREATE UNIQUE INDEX retracted_pub_source_src_key_key ON core.retracted_pub USING btree (source, src_key)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "retracted_pub_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    },
+    {
+     "ad": "retracted_pub_source_src_key_key",
+     "tanim": "UNIQUE (source, src_key)",
+     "tip": "u"
+    }
+   ],
+   "yorum": ""
+  },
+  "sgk_odeme": {
+   "kolon": [
+    {
+     "ad": "barkod",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "kamu_no",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "ilac_adi",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "esdeger_grup",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "terapotik_grup",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "liste_giris",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "aktiflenme",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 7
+    },
+    {
+     "ad": "pasiflenme",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 8
+    },
+    {
+     "ad": "surum_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 9
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "idx_sgk_odeme_ad",
+     "tanim": "CREATE INDEX idx_sgk_odeme_ad ON core.sgk_odeme USING btree (lower(ilac_adi))"
+    },
+    {
+     "ad": "idx_sgk_odeme_esdeger",
+     "tanim": "CREATE INDEX idx_sgk_odeme_esdeger ON core.sgk_odeme USING btree (esdeger_grup)"
+    },
+    {
+     "ad": "sgk_odeme_pkey",
+     "tanim": "CREATE UNIQUE INDEX sgk_odeme_pkey ON core.sgk_odeme USING btree (barkod)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "sgk_odeme_pkey",
+     "tanim": "PRIMARY KEY (barkod)",
+     "tip": "p"
+    },
+    {
+     "ad": "sgk_odeme_surum_id_fkey",
+     "tanim": "FOREIGN KEY (surum_id) REFERENCES core.sgk_odeme_surum(id) ON DELETE CASCADE",
+     "tip": "f"
+    }
+   ],
+   "yorum": ""
+  },
+  "sgk_odeme_surum": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "nextval('core.sgk_odeme_surum_id_seq'::regclass)",
+     "sira": 1
+    },
+    {
+     "ad": "duyuru_url",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "duyuru_tarihi",
+     "tip": "date",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "dosya_adi",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "satir_sayisi",
+     "tip": "integer",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "cekildi_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 6
+    },
+    {
+     "ad": "aktif",
+     "tip": "boolean",
+     "null": false,
+     "vars": "false",
+     "sira": 7
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "idx_sgk_surum_tek_aktif",
+     "tanim": "CREATE UNIQUE INDEX idx_sgk_surum_tek_aktif ON core.sgk_odeme_surum USING btree (aktif) WHERE aktif"
+    },
+    {
+     "ad": "sgk_odeme_surum_pkey",
+     "tanim": "CREATE UNIQUE INDEX sgk_odeme_surum_pkey ON core.sgk_odeme_surum USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "sgk_odeme_surum_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "symptom": {
+   "kolon": [
+    {
+     "ad": "hpo_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "label",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "definition",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "idx_symptom_label",
+     "tanim": "CREATE INDEX idx_symptom_label ON core.symptom USING btree (lower(label))"
+    },
+    {
+     "ad": "symptom_pkey",
+     "tanim": "CREATE UNIQUE INDEX symptom_pkey ON core.symptom USING btree (hpo_id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "symptom_pkey",
+     "tanim": "PRIMARY KEY (hpo_id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "symptom_disease": {
+   "kolon": [
+    {
+     "ad": "hpo_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "disease_ref",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "disease_name",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "frequency",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "icd_disease_id",
+     "tip": "bigint",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "idx_sd_hpo",
+     "tanim": "CREATE INDEX idx_sd_hpo ON core.symptom_disease USING btree (hpo_id)"
+    },
+    {
+     "ad": "idx_sd_icd",
+     "tanim": "CREATE INDEX idx_sd_icd ON core.symptom_disease USING btree (icd_disease_id)"
+    },
+    {
+     "ad": "symptom_disease_pkey",
+     "tanim": "CREATE UNIQUE INDEX symptom_disease_pkey ON core.symptom_disease USING btree (hpo_id, disease_ref)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "symptom_disease_icd_disease_id_fkey",
+     "tanim": "FOREIGN KEY (icd_disease_id) REFERENCES core.disease(id) ON DELETE SET NULL",
+     "tip": "f"
+    },
+    {
+     "ad": "symptom_disease_pkey",
+     "tanim": "PRIMARY KEY (hpo_id, disease_ref)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "sync_state": {
+   "kolon": [
+    {
+     "ad": "source_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "cursor",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "last_key",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "records_total",
+     "tip": "bigint",
+     "null": false,
+     "vars": "0",
+     "sira": 4
+    },
+    {
+     "ad": "last_run_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "last_success_at",
+     "tip": "timestamp with time zone",
+     "null": true,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 7
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "sync_state_pkey",
+     "tanim": "CREATE UNIQUE INDEX sync_state_pkey ON core.sync_state USING btree (source_id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "sync_state_pkey",
+     "tanim": "PRIMARY KEY (source_id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "trial": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "nct_id",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "title",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "status",
+     "tip": "text",
+     "null": true,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "conditions",
+     "tip": "ARRAY",
+     "null": true,
+     "vars": "",
+     "sira": 5
+    },
+    {
+     "ad": "source_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 6
+    },
+    {
+     "ad": "updated_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 7
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "trial_nct_id_key",
+     "tanim": "CREATE UNIQUE INDEX trial_nct_id_key ON core.trial USING btree (nct_id)"
+    },
+    {
+     "ad": "trial_pkey",
+     "tanim": "CREATE UNIQUE INDEX trial_pkey ON core.trial USING btree (id)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "trial_nct_id_key",
+     "tanim": "UNIQUE (nct_id)",
+     "tip": "u"
+    },
+    {
+     "ad": "trial_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    }
+   ],
+   "yorum": ""
+  },
+  "trial_disease": {
+   "kolon": [
+    {
+     "ad": "trial_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "disease_id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "method",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "idx_td_disease",
+     "tanim": "CREATE INDEX idx_td_disease ON core.trial_disease USING btree (disease_id)"
+    },
+    {
+     "ad": "trial_disease_pkey",
+     "tanim": "CREATE UNIQUE INDEX trial_disease_pkey ON core.trial_disease USING btree (trial_id, disease_id, method)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "trial_disease_disease_id_fkey",
+     "tanim": "FOREIGN KEY (disease_id) REFERENCES core.disease(id) ON DELETE CASCADE",
+     "tip": "f"
+    },
+    {
+     "ad": "trial_disease_pkey",
+     "tanim": "PRIMARY KEY (trial_id, disease_id, method)",
+     "tip": "p"
+    },
+    {
+     "ad": "trial_disease_trial_id_fkey",
+     "tanim": "FOREIGN KEY (trial_id) REFERENCES core.trial(id) ON DELETE CASCADE",
+     "tip": "f"
+    }
+   ],
+   "yorum": ""
+  }
+ },
+ "raw": {
+  "records": {
+   "kolon": [
+    {
+     "ad": "id",
+     "tip": "bigint",
+     "null": false,
+     "vars": "",
+     "sira": 1
+    },
+    {
+     "ad": "source_id",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 2
+    },
+    {
+     "ad": "source_key",
+     "tip": "text",
+     "null": false,
+     "vars": "",
+     "sira": 3
+    },
+    {
+     "ad": "payload",
+     "tip": "jsonb",
+     "null": false,
+     "vars": "",
+     "sira": 4
+    },
+    {
+     "ad": "fetched_at",
+     "tip": "timestamp with time zone",
+     "null": false,
+     "vars": "now()",
+     "sira": 5
+    }
+   ],
+   "indeks": [
+    {
+     "ad": "idx_raw_source",
+     "tanim": "CREATE INDEX idx_raw_source ON raw.records USING btree (source_id)"
+    },
+    {
+     "ad": "records_pkey",
+     "tanim": "CREATE UNIQUE INDEX records_pkey ON raw.records USING btree (id)"
+    },
+    {
+     "ad": "records_source_id_source_key_key",
+     "tanim": "CREATE UNIQUE INDEX records_source_id_source_key_key ON raw.records USING btree (source_id, source_key)"
+    }
+   ],
+   "kisit": [
+    {
+     "ad": "records_pkey",
+     "tanim": "PRIMARY KEY (id)",
+     "tip": "p"
+    },
+    {
+     "ad": "records_source_id_source_key_key",
+     "tanim": "UNIQUE (source_id, source_key)",
+     "tip": "u"
+    }
+   ],
+   "yorum": ""
+  }
+ }
+}

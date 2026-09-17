@@ -1,0 +1,44 @@
+[
+ {
+  "sinif": "BaseHTTPMiddleware",
+  "opts": {
+   "dispatch": "_security_headers_mw"
+  }
+ },
+ {
+  "sinif": "BaseHTTPMiddleware",
+  "opts": {
+   "dispatch": "_css_yorum_mw"
+  }
+ },
+ {
+  "sinif": "BaseHTTPMiddleware",
+  "opts": {
+   "dispatch": "_noindex_staging_mw"
+  }
+ },
+ {
+  "sinif": "BaseHTTPMiddleware",
+  "opts": {
+   "dispatch": "_notrack_mw"
+  }
+ },
+ {
+  "sinif": "BaseHTTPMiddleware",
+  "opts": {
+   "dispatch": "_acq_mw"
+  }
+ },
+ {
+  "sinif": "BaseHTTPMiddleware",
+  "opts": {
+   "dispatch": "i18n_mw"
+  }
+ },
+ {
+  "sinif": "BaseHTTPMiddleware",
+  "opts": {
+   "dispatch": "profil_kapisi_mw"
+  }
+ }
+]

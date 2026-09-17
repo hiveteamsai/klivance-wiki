@@ -1,0 +1,1846 @@
+[
+ {
+  "yol": "/static",
+  "metot": [],
+  "ad": "static",
+  "modul": "",
+  "satir": 0,
+  "imza": "",
+  "doc": "",
+  "sinif": "Mount",
+  "schema": null
+ },
+ {
+  "yol": "/favicon.ico",
+  "metot": [
+   "GET"
+  ],
+  "ad": "_favicon_ico",
+  "modul": "saglik.app.main",
+  "satir": 194,
+  "imza": "()",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": false
+ },
+ {
+  "yol": "/lang/{code}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "set_lang",
+  "modul": "saglik.app.main",
+  "satir": 301,
+  "imza": "(code: 'str', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/iz-kapat",
+  "metot": [
+   "GET"
+  ],
+  "ad": "notrack_on_page",
+  "modul": "saglik.app.main",
+  "satir": 529,
+  "imza": "()",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/iz-kapat",
+  "metot": [
+   "POST"
+  ],
+  "ad": "notrack_on",
+  "modul": "saglik.app.main",
+  "satir": 535,
+  "imza": "()",
+  "doc": "Bu cihazda analitik izlemeyi kapat (founder/QA cihazları — /admin açmayan telefon vb. için).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/iz-ac",
+  "metot": [
+   "GET"
+  ],
+  "ad": "notrack_off_page",
+  "modul": "saglik.app.main",
+  "satir": 547,
+  "imza": "()",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/iz-ac",
+  "metot": [
+   "POST"
+  ],
+  "ad": "notrack_off",
+  "modul": "saglik.app.main",
+  "satir": 553,
+  "imza": "()",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/health",
+  "metot": [
+   "GET"
+  ],
+  "ad": "health",
+  "modul": "saglik.app.main",
+  "satir": 717,
+  "imza": "()",
+  "doc": "Render sağlık kontrolü (M29). Landing render etmek yerine UCUZ bir DB dokunuşu:",
+  "sinif": "APIRoute",
+  "schema": false
+ },
+ {
+  "yol": "/ig",
+  "metot": [
+   "GET"
+  ],
+  "ad": "sl_instagram",
+  "modul": "saglik.app.main",
+  "satir": 752,
+  "imza": "()",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": false
+ },
+ {
+  "yol": "/fb",
+  "metot": [
+   "GET"
+  ],
+  "ad": "sl_facebook",
+  "modul": "saglik.app.main",
+  "satir": 757,
+  "imza": "()",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": false
+ },
+ {
+  "yol": "/li",
+  "metot": [
+   "GET"
+  ],
+  "ad": "sl_linkedin",
+  "modul": "saglik.app.main",
+  "satir": 762,
+  "imza": "()",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": false
+ },
+ {
+  "yol": "/tg",
+  "metot": [
+   "GET"
+  ],
+  "ad": "sl_telegram",
+  "modul": "saglik.app.main",
+  "satir": 767,
+  "imza": "()",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": false
+ },
+ {
+  "yol": "/interactions",
+  "metot": [
+   "GET"
+  ],
+  "ad": "sl_interactions",
+  "modul": "saglik.app.main",
+  "satir": 787,
+  "imza": "(request: 'Request')",
+  "doc": "`/interactions` → 301 → `/etkilesim` (sorgu dizesi korunur).",
+  "sinif": "APIRoute",
+  "schema": false
+ },
+ {
+  "yol": "/robots.txt",
+  "metot": [
+   "GET"
+  ],
+  "ad": "robots_txt",
+  "modul": "saglik.app.main",
+  "satir": 794,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/sitemap.xml",
+  "metot": [
+   "GET"
+  ],
+  "ad": "sitemap_xml",
+  "modul": "saglik.app.main",
+  "satir": 811,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/",
+  "metot": [
+   "GET"
+  ],
+  "ad": "root",
+  "modul": "saglik.app.main",
+  "satir": 956,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/giris",
+  "metot": [
+   "GET"
+  ],
+  "ad": "login_page",
+  "modul": "saglik.app.auth_routes",
+  "satir": 502,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/giris",
+  "metot": [
+   "POST"
+  ],
+  "ad": "login",
+  "modul": "saglik.app.auth_routes",
+  "satir": 533,
+  "imza": "(request: 'Request', email: 'str' = Form(PydanticUndefined), password: 'str' = Form(PydanticUndefined), next: 'str' = Form(), prg: 'str' = Form())",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/kayit",
+  "metot": [
+   "GET"
+  ],
+  "ad": "register_page",
+  "modul": "saglik.app.auth_routes",
+  "satir": 567,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/parola-sifirla",
+  "metot": [
+   "GET"
+  ],
+  "ad": "reset_request_page",
+  "modul": "saglik.app.auth_routes",
+  "satir": 603,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/parola-sifirla",
+  "metot": [
+   "POST"
+  ],
+  "ad": "reset_request",
+  "modul": "saglik.app.auth_routes",
+  "satir": 619,
+  "imza": "(request: 'Request', email: 'str' = Form(PydanticUndefined))",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/parola-sifirla/{token}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "reset_form_page",
+  "modul": "saglik.app.auth_routes",
+  "satir": 641,
+  "imza": "(token: 'str', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/parola-sifirla/{token}",
+  "metot": [
+   "POST"
+  ],
+  "ad": "reset_submit",
+  "modul": "saglik.app.auth_routes",
+  "satir": 664,
+  "imza": "(token: 'str', request: 'Request', password: 'str' = Form(PydanticUndefined), password2: 'str' = Form())",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/mail-tercihi/{token}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "mail_tercihi_page",
+  "modul": "saglik.app.auth_routes",
+  "satir": 807,
+  "imza": "(token: 'str', request: 'Request')",
+  "doc": "Onay sayfasını GÖSTERİR — HİÇBİR ŞEY UYGULAMAZ (bkz. bölüm başlığı).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/mail-tercihi/{token}",
+  "metot": [
+   "POST"
+  ],
+  "ad": "mail_tercihi_uygula",
+  "modul": "saglik.app.auth_routes",
+  "satir": 829,
+  "imza": "(token: 'str', request: 'Request')",
+  "doc": "Tercihi UYGULAR. İdempotent; oturum/çerez istemez.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/kayit",
+  "metot": [
+   "POST"
+  ],
+  "ad": "register",
+  "modul": "saglik.app.auth_routes",
+  "satir": 1171,
+  "imza": "(request: 'Request', first_name: 'str' = Form(), last_name: 'str' = Form(), email: 'str' = Form(PydanticUndefined), password: 'str' = Form(PydanticUndefined), password2: 'str' = Form(), phone: 'str' = Form(), phone_cc: 'str' = Form(+90), dogum_gun: 'str' = Form(), dogum_ay: 'str' = Form(), dogum_yil: 'str' = Form(), ulke: 'str' = Form(), sehir: 'str' = Form(), sehir_diger: 'str' = Form(), unvan: 'str' = Form(), specialty: 'str' = Form(), c_terms: 'str' = Form(), c_kvkk: 'str' = Form())",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/onay",
+  "metot": [
+   "GET"
+  ],
+  "ad": "consent_page",
+  "modul": "saglik.app.auth_routes",
+  "satir": 1331,
+  "imza": "(request: 'Request', next: 'str' = '/chat', err: 'str' = '')",
+  "doc": "`/onay` GET rotası — İNCE SARMALAYICI, gövde `_onay_govde`de.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/onay",
+  "metot": [
+   "POST"
+  ],
+  "ad": "consent_submit",
+  "modul": "saglik.app.auth_routes",
+  "satir": 1444,
+  "imza": "(request: 'Request', next: 'str' = '/chat', next_f: 'str' = Form(), phone: 'str' = Form(), phone_cc: 'str' = Form(+90), unvan: 'str' = Form(), specialty: 'str' = Form(), dogum_gun: 'str' = Form(), dogum_ay: 'str' = Form(), dogum_yil: 'str' = Form(), ulke: 'str' = Form(), sehir: 'str' = Form(), sehir_diger: 'str' = Form(), c_terms: 'str' = Form(), c_kvkk: 'str' = Form())",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/auth/google",
+  "metot": [
+   "GET"
+  ],
+  "ad": "google_auth_start",
+  "modul": "saglik.app.auth_routes",
+  "satir": 1534,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/auth/google/callback",
+  "metot": [
+   "GET"
+  ],
+  "ad": "google_auth_callback",
+  "modul": "saglik.app.auth_routes",
+  "satir": 1558,
+  "imza": "(request: 'Request', code: 'str' = '', state: 'str' = '', error: 'str' = '')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/dogrula/{token}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "verify_email",
+  "modul": "saglik.app.auth_routes",
+  "satir": 1699,
+  "imza": "(token: 'str', request: 'Request', response: 'Response')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/dogrulandi",
+  "metot": [
+   "GET"
+  ],
+  "ad": "verify_done",
+  "modul": "saglik.app.auth_routes",
+  "satir": 1738,
+  "imza": "(request: 'Request', response: 'Response')",
+  "doc": "#230b — doğrulama SONUÇ sayfası. URL'de SIR YOK ⇒ TAM analytics taşır (`izsiz` ALMAZ).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/verify/resend",
+  "metot": [
+   "POST"
+  ],
+  "ad": "resend_verify",
+  "modul": "saglik.app.auth_routes",
+  "satir": 1760,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/cikis",
+  "metot": [
+   "POST"
+  ],
+  "ad": "logout",
+  "modul": "saglik.app.auth_routes",
+  "satir": 1790,
+  "imza": "(request: 'Request')",
+  "doc": "Çıkış — ⚠ M13: ARTIK POST. GET iken `<img src=\"…/cikis\">` ile CSRF-logout yapılabiliyordu",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/cikis",
+  "metot": [
+   "GET"
+  ],
+  "ad": "logout_get",
+  "modul": "saglik.app.auth_routes",
+  "satir": 1804,
+  "imza": "(request: 'Request')",
+  "doc": "Eski GET bağlantıları (yer imi, e-posta, dış link) için köprü: OTURUMU KAPATMAZ,",
+  "sinif": "APIRoute",
+  "schema": false
+ },
+ {
+  "yol": "/api/cihaz/istek",
+  "metot": [
+   "POST"
+  ],
+  "ad": "cihaz_istek",
+  "modul": "saglik.app.cihaz_routes",
+  "satir": 188,
+  "imza": "(request: 'Request')",
+  "doc": "Program bir eşleştirme isteği açar; ekranda gösterilecek KODU döner.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cihaz/bekle",
+  "metot": [
+   "POST"
+  ],
+  "ad": "cihaz_bekle",
+  "modul": "saglik.app.cihaz_routes",
+  "satir": 253,
+  "imza": "(request: 'Request')",
+  "doc": "Program 2 sn'de bir yoklar. Onaylandıysa CİHAZ SIRRINI **bir kez** döner.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/cihaz",
+  "metot": [
+   "GET"
+  ],
+  "ad": "cihaz_sayfa",
+  "modul": "saglik.app.cihaz_routes",
+  "satir": 319,
+  "imza": "(request: 'Request', h: 'str' = '', g: 'str' = '', k: 'str' = '')",
+  "doc": "Onay sayfası (`?k=` ile TEK TIK) + elle kod formu + bağlı cihaz listesi.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/cihaz",
+  "metot": [
+   "POST"
+  ],
+  "ad": "cihaz_onayla",
+  "modul": "saglik.app.cihaz_routes",
+  "satir": 520,
+  "imza": "(request: 'Request', kod: 'str' = Form())",
+  "doc": "Hekim programdaki kodu buraya yazar; istek ONAYLANIR.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/cihaz/sil",
+  "metot": [
+   "POST"
+  ],
+  "ad": "cihaz_sil",
+  "modul": "saglik.app.cihaz_routes",
+  "satir": 564,
+  "imza": "(request: 'Request', cid: 'str' = Form())",
+  "doc": "Bağlantıyı kes — cihaz satırı VE onun bastığı oturumlar düşer.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cihaz/oturum",
+  "metot": [
+   "POST"
+  ],
+  "ad": "cihaz_oturum",
+  "modul": "saglik.app.cihaz_routes",
+  "satir": 589,
+  "imza": "(request: 'Request')",
+  "doc": "Cihaz sırrı → kısa ömürlü `app.session` çerezi.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/analyze",
+  "metot": [
+   "POST"
+  ],
+  "ad": "analyze_case",
+  "modul": "saglik.app.analiz_routes",
+  "satir": 126,
+  "imza": "(cid: int, request: starlette.requests.Request)",
+  "doc": "Seçili (veya tüm aktif) dosyaları MAP-REDUCE ile birlikte analiz et → ziyaret olarak kaydet.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/chat",
+  "metot": [
+   "GET"
+  ],
+  "ad": "chat_page",
+  "modul": "saglik.app.chat_routes",
+  "satir": 285,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/threads",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_threads",
+  "modul": "saglik.app.chat_routes",
+  "satir": 461,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/threads/{tid}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_thread_get",
+  "modul": "saglik.app.chat_routes",
+  "satir": 476,
+  "imza": "(tid: 'int', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/threads/{tid}",
+  "metot": [
+   "DELETE"
+  ],
+  "ad": "api_thread_delete",
+  "modul": "saglik.app.chat_routes",
+  "satir": 498,
+  "imza": "(tid: 'int', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/threads/{tid}",
+  "metot": [
+   "PATCH"
+  ],
+  "ad": "api_thread_rename",
+  "modul": "saglik.app.chat_routes",
+  "satir": 508,
+  "imza": "(tid: 'int', request: 'Request')",
+  "doc": "Konuşmayı yeniden adlandır (sahiplik store'da zorlanır).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/chat",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_chat",
+  "modul": "saglik.app.chat_routes",
+  "satir": 724,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/dose-check",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_dose_check",
+  "modul": "saglik.app.chat_routes",
+  "satir": 1111,
+  "imza": "(request: 'Request')",
+  "doc": "Yanıttaki dozları ayrı dar ajanla denetle (ikinci-göz güvenlik; kotasız).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/redflag",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_redflag",
+  "modul": "saglik.app.chat_routes",
+  "satir": 1151,
+  "imza": "(request: 'Request')",
+  "doc": "Kaçmış aciliyet örüntüsü tara (triyaj rozeti; tanı değil; kotasız).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/whatmissed",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_whatmissed",
+  "modul": "saglik.app.chat_routes",
+  "satir": 1159,
+  "imza": "(request: 'Request')",
+  "doc": "'Ne kaçırdım?' — yanıtın atladığı klinik noktaları listeler (Sonnet, 1 kota).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/drug-card",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_drug_card",
+  "modul": "saglik.app.chat_routes",
+  "satir": 1197,
+  "imza": "(request: 'Request')",
+  "doc": "İlaç kartı — tek ilaç için yapılandırılmış atıflı klinik kart.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/deep-analyze",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_deep_analyze",
+  "modul": "saglik.app.chat_routes",
+  "satir": 1293,
+  "imza": "(request: 'Request')",
+  "doc": "Derin Analiz — max-efor Opus yanıt → critic → koşullu revize. 1 kota (critic/revize içeride, kotasız).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/simplify",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_simplify",
+  "modul": "saglik.app.chat_routes",
+  "satir": 1385,
+  "imza": "(request: 'Request')",
+  "doc": "Hasta İçin Sadeleştir — yanıtı hasta diline çevir (Haiku, kotasız).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/council",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_council",
+  "modul": "saglik.app.chat_routes",
+  "satir": 1426,
+  "imza": "(request: 'Request')",
+  "doc": "Konsey (eski adı Doktor Paneli) — triyaj → 3 branş → moderatör. (~4 kota içeride sayılır.)",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/timeline",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_case_timeline",
+  "modul": "saglik.app.chat_routes",
+  "satir": 1504,
+  "imza": "(cid: 'int', request: 'Request')",
+  "doc": "Hasta Zaman-Tüneli — kayıttan kronolojik trend özeti (Sonnet, 1 kota).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/mycases",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_mycases",
+  "modul": "saglik.app.chat_routes",
+  "satir": 1575,
+  "imza": "(request: 'Request')",
+  "doc": "Composer hasta seçici için hafif liste (id, code) + ÇAĞIRAN HEKİMİN KİMLİĞİ.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/chat/durdur",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_chat_durdur",
+  "modul": "saglik.app.chat_turn",
+  "satir": 224,
+  "imza": "(request: 'Request')",
+  "doc": "Durdur tuşu: hekime ait `uretiliyor` satırı `iptal` olur → thread bir sonraki yoklamada",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/chat/turn/{turn}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_chat_turn",
+  "modul": "saglik.app.chat_turn",
+  "satir": 248,
+  "imza": "(turn: 'str', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/takvim",
+  "metot": [
+   "GET"
+  ],
+  "ad": "takvim_page",
+  "modul": "saglik.app.cal_routes",
+  "satir": 178,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/calendar",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_calendar_list",
+  "modul": "saglik.app.cal_routes",
+  "satir": 197,
+  "imza": "(request: 'Request', start: 'str' = '', end: 'str' = '', upcoming: 'str' = '', overdue: 'str' = '')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/calendar",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_calendar_create",
+  "modul": "saglik.app.cal_routes",
+  "satir": 222,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/calendar/{aid}",
+  "metot": [
+   "PATCH"
+  ],
+  "ad": "api_calendar_update",
+  "modul": "saglik.app.cal_routes",
+  "satir": 254,
+  "imza": "(aid: 'int', request: 'Request')",
+  "doc": "Etkinliği düzenle (kısmi): {at?, kind?, title?, case_id?}.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/calendar/{aid}/done",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_calendar_done",
+  "modul": "saglik.app.cal_routes",
+  "satir": 301,
+  "imza": "(aid: 'int', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/calendar/{aid}",
+  "metot": [
+   "DELETE"
+  ],
+  "ad": "api_calendar_delete",
+  "modul": "saglik.app.cal_routes",
+  "satir": 321,
+  "imza": "(aid: 'int', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/reference",
+  "metot": [
+   "GET"
+  ],
+  "ad": "reference_page",
+  "modul": "saglik.app.ref_routes",
+  "satir": 117,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/etkilesim",
+  "metot": [
+   "GET"
+  ],
+  "ad": "etkilesim_page",
+  "modul": "saglik.app.ref_routes",
+  "satir": 133,
+  "imza": "(request: 'Request', a: 'str' = '', b: 'str' = '', d: 'str' = '')",
+  "doc": "Etiket-temelli ilaç etkileşimi taraması — kayıt gerekmez, kredi harcamaz.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/hesaplayicilar",
+  "metot": [
+   "GET"
+  ],
+  "ad": "calculators_page",
+  "modul": "saglik.app.ref_routes",
+  "satir": 157,
+  "imza": "(request: 'Request', c: 'str' = '')",
+  "doc": "Klinik hesaplayıcılar — istemci-tarafı, ücretsiz (kredi harcamaz). HERKESE AÇIK (2026-07-19):",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/query",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_query",
+  "modul": "saglik.app.ref_routes",
+  "satir": 269,
+  "imza": "(request: 'Request', q: 'str' = '')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/suggest",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_suggest",
+  "modul": "saglik.app.ref_routes",
+  "satir": 321,
+  "imza": "(request: 'Request', q: 'str' = '')",
+  "doc": "Referans arama autocomplete — ilaç adı önerileri (aktif segment prefiksi). SALT DB, LLM/kota YOK.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/cases",
+  "metot": [
+   "GET"
+  ],
+  "ad": "cases_page",
+  "modul": "saglik.app.cases_routes",
+  "satir": 331,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/cases/{cid}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "case_detail_page",
+  "modul": "saglik.app.cases_routes",
+  "satir": 510,
+  "imza": "(cid: 'int', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases",
+  "metot": [
+   "POST"
+  ],
+  "ad": "create_case",
+  "modul": "saglik.app.cases_routes",
+  "satir": 1192,
+  "imza": "(request: 'Request', code: 'str' = Form(PydanticUndefined), age_band: 'str' = Form(), sex: 'str' = Form(), narrative: 'str' = Form(), chronic: 'str' = Form(), meds: 'str' = Form(), egfr: 'str' = Form(), kreatinin: 'str' = Form(), kilo_kg: 'str' = Form(), gebelik_haftasi: 'str' = Form(), boy_cm: 'str' = Form(), allergy_status: 'str' = Form(), allergy_chip: 'list[str]' = Form([]), allergy_other: 'str' = Form(), allergy_severity: 'str' = Form(), gebe_olabilir: 'str' = Form(), emziriyor: 'str' = Form(), yas: 'str' = Form())",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/update",
+  "metot": [
+   "POST"
+  ],
+  "ad": "update_case",
+  "modul": "saglik.app.cases_routes",
+  "satir": 1263,
+  "imza": "(cid: 'int', request: 'Request', age_band: 'str' = Form(), sex: 'str' = Form(), narrative: 'str' = Form(), chronic: 'str' = Form(), meds: 'str' = Form(), egfr: 'str' = Form(), kreatinin: 'str' = Form(), kilo_kg: 'str' = Form(), gebelik_haftasi: 'str' = Form(), boy_cm: 'str' = Form(), allergy_status: 'str' = Form(), allergies: 'str' = Form(), gebe_olabilir: 'str' = Form(), emziriyor: 'str' = Form(), yas: 'str' = Form())",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/delete",
+  "metot": [
+   "POST"
+  ],
+  "ad": "delete_case",
+  "modul": "saglik.app.cases_routes",
+  "satir": 1306,
+  "imza": "(cid: 'int', request: 'Request', onay: 'str' = Form())",
+  "doc": "Hasta kartını KALICI sil — hekimin KENDİ kartı (founder 03.09).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/visit",
+  "metot": [
+   "POST"
+  ],
+  "ad": "add_visit",
+  "modul": "saglik.app.cases_routes",
+  "satir": 1331,
+  "imza": "(cid: 'int', request: 'Request', note: 'str' = Form(PydanticUndefined), analyze: 'str' = Form())",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/files",
+  "metot": [
+   "POST"
+  ],
+  "ad": "upload_case_files",
+  "modul": "saglik.app.cases_routes",
+  "satir": 1352,
+  "imza": "(cid: 'int', request: 'Request', files: 'list[UploadFile]' = File(PydanticUndefined))",
+  "doc": "Hastaya kalıcı, ŞİFRELİ dosya yükle (LLM YOK → kota TÜKETMEZ). Dosyalar DB'de bytea.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/files/{fid}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "download_case_file",
+  "modul": "saglik.app.cases_routes",
+  "satir": 1430,
+  "imza": "(cid: 'int', fid: 'int', request: 'Request')",
+  "doc": "Şifreli dosyayı çöz + orijinal mime ile inline döndür (önizleme/indirme).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/dosya-durumu",
+  "metot": [
+   "GET"
+  ],
+  "ad": "case_file_status",
+  "modul": "saglik.app.cases_routes",
+  "satir": 1469,
+  "imza": "(cid: 'int', request: 'Request')",
+  "doc": "Kartın ANALİZ DURUMU — yalnız SAYI (#705b-b). LLM yok, ücret yok, 0 yazma.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/files/{fid}/delete",
+  "metot": [
+   "POST"
+  ],
+  "ad": "delete_case_file",
+  "modul": "saglik.app.cases_routes",
+  "satir": 1491,
+  "imza": "(cid: 'int', fid: 'int', request: 'Request')",
+  "doc": "Dosyayı soft-delete (hekim silme hakkı — KVKK).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/enabiz-tahlil",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_enabiz_tahlil",
+  "modul": "saglik.app.enabiz_tahlil",
+  "satir": 413,
+  "imza": "(cid: 'int', request: 'Request')",
+  "doc": "Eklentiden gelen tahlil paketi → şifreli belge + önceden dolu çıkarım (LLM YOK).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/account",
+  "metot": [
+   "GET"
+  ],
+  "ad": "account_page",
+  "modul": "saglik.app.account_routes",
+  "satir": 274,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin",
+  "metot": [
+   "GET"
+  ],
+  "ad": "admin_page",
+  "modul": "saglik.app.admin_routes",
+  "satir": 145,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/kur",
+  "metot": [
+   "POST"
+  ],
+  "ad": "admin_set_kur",
+  "modul": "saglik.app.admin_routes",
+  "satir": 669,
+  "imza": "(request: 'Request', kur: 'str' = Form())",
+  "doc": "USD/TRY kurunu kaydet (yalnız admin). Sonuç `/admin?kur=…` ile GÖRÜNÜR (ok · gecersiz ·",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/reklam",
+  "metot": [
+   "POST"
+  ],
+  "ad": "admin_set_reklam",
+  "modul": "saglik.app.admin_routes",
+  "satir": 689,
+  "imza": "(request: 'Request', tutar: 'str' = Form(), yil: 'str' = Form(), ay: 'str' = Form())",
+  "doc": "SEÇİLEN AYIN toplam reklam harcamasını kaydet (Meta + Google, elle) — birim-ekonomi",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/feedback/{fid}",
+  "metot": [
+   "POST"
+  ],
+  "ad": "admin_feedback_status",
+  "modul": "saglik.app.admin_routes",
+  "satir": 705,
+  "imza": "(fid: 'int', request: 'Request', st: 'str' = 'read')",
+  "doc": "Geri bildirim durumu: new → read → done (yalnız admin).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/sorular",
+  "metot": [
+   "GET"
+  ],
+  "ad": "admin_questions",
+  "modul": "saglik.app.admin_routes",
+  "satir": 715,
+  "imza": "(request: 'Request')",
+  "doc": "Soru görünürlüğü — ⚠ FOUNDER KARARI 2026-08-14: HEKİM KİMLİĞİ GÖSTERİLİR (hekim adı",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/arsiv",
+  "metot": [
+   "GET"
+  ],
+  "ad": "admin_archive_page",
+  "modul": "saglik.app.admin_routes",
+  "satir": 829,
+  "imza": "(request: 'Request')",
+  "doc": "Silinen üyeler arşivi — kayıtlar kaybolmaz (kullanıcı kararı); snapshot özetiyle listelenir.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/odeme/mutabakat",
+  "metot": [
+   "POST"
+  ],
+  "ad": "admin_mutabakat",
+  "modul": "saglik.app.admin_routes",
+  "satir": 1013,
+  "imza": "(request: 'Request')",
+  "doc": "Bekleyen iyzico ödemelerini mutabakata sok (hak-ediş + makbuz). YALNIZ ADMİN.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/soru-analiz",
+  "metot": [
+   "GET"
+  ],
+  "ad": "admin_soru_analiz_page",
+  "modul": "saglik.app.admin_routes",
+  "satir": 1090,
+  "imza": "(request: 'Request')",
+  "doc": "Soru analizi panosu (#715b K3). Ham soru metni GÖSTERMEZ — o yüzey `/admin/sorular`.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/soru-analiz/uret",
+  "metot": [
+   "POST"
+  ],
+  "ad": "admin_soru_analiz_uret",
+  "modul": "saglik.app.admin_routes",
+  "satir": 1134,
+  "imza": "(request: 'Request')",
+  "doc": "\"Şimdi üret\" düğmesi — gecelik iş gelene dek TEK çalıştırma yüzeyi (#715b K3).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/odeme",
+  "metot": [
+   "GET"
+  ],
+  "ad": "admin_payment_diag",
+  "modul": "saglik.app.admin_routes",
+  "satir": 1144,
+  "imza": "(request: 'Request')",
+  "doc": "iyzico ödeme teşhisi — son denemeleri listeler; hak-edilmemiş (granted=false) satırların",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/{did}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "admin_detail_page",
+  "modul": "saglik.app.admin_routes",
+  "satir": 1222,
+  "imza": "(did: 'int', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/admin/{did}/profile",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_admin_profile",
+  "modul": "saglik.app.admin_routes",
+  "satir": 1583,
+  "imza": "(did: 'int', request: 'Request', full_name: 'str' = Form(), email: 'str' = Form(), unvan: 'str' = Form(), specialty: 'str' = Form(), kurum: 'str' = Form(), phone: 'str' = Form(), is_test: 'str' = Form(), is_test_sent: 'str' = Form())",
+  "doc": "⚠ `is_test_sent` hidden alanı olmadan işaretlemeyi KALDIRMAK imkânsızdır: işaretsiz",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/admin/{did}/delete",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_admin_delete",
+  "modul": "saglik.app.admin_routes",
+  "satir": 1600,
+  "imza": "(did: 'int', request: 'Request', reason: 'str' = Form(), confirm: 'str' = Form())",
+  "doc": "Arşivli üye silme. Guard: kendi hesabı / admin silinemez; onay = üyenin e-postası.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/admin/{did}",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_admin_update",
+  "modul": "saglik.app.admin_routes",
+  "satir": 1631,
+  "imza": "(did: 'int', request: 'Request', plan: 'str' = Form(), monthly_quota: 'str' = Form(), verification_status: 'str' = Form())",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/admin/{did}/grant",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_admin_grant_credit",
+  "modul": "saglik.app.admin_routes",
+  "satir": 1646,
+  "imza": "(did: 'int', request: 'Request', credits: 'str' = Form(), note: 'str' = Form(), nonce: 'str' = Form())",
+  "doc": "Admin comp: hekimin SINIRSIZ ERİŞİM SÜRESİNİ uzatır + bildirim e-postası gönderir.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/profile",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_profile_update",
+  "modul": "saglik.app.account_routes",
+  "satir": 572,
+  "imza": "(request: 'Request', full_name: 'str' = Form(), unvan: 'str' = Form(), specialty: 'str' = Form(), kurum: 'str' = Form(), phone: 'str' = Form())",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/profile/password",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_profile_password",
+  "modul": "saglik.app.account_routes",
+  "satir": 583,
+  "imza": "(request: 'Request', old_pw: 'str' = Form(PydanticUndefined), new_pw: 'str' = Form(PydanticUndefined), new_pw2: 'str' = Form(PydanticUndefined))",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/account/delete",
+  "metot": [
+   "POST"
+  ],
+  "ad": "account_delete",
+  "modul": "saglik.app.account_routes",
+  "satir": 602,
+  "imza": "(request: 'Request', confirm: 'str' = Form())",
+  "doc": "Hesap silme talebi (KVKK unutulma hakkı). Yazılı onay (\"SİL\"/\"DELETE\" ya da hesap e-postası)",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/account/delete/cancel",
+  "metot": [
+   "POST"
+  ],
+  "ad": "account_delete_cancel",
+  "modul": "saglik.app.account_routes",
+  "satir": 619,
+  "imza": "(request: 'Request')",
+  "doc": "Silme talebini geri al (grace içinde). deletion_requested_at=NULL.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/account/feedback",
+  "metot": [
+   "POST"
+  ],
+  "ad": "account_feedback",
+  "modul": "saglik.app.account_routes",
+  "satir": 630,
+  "imza": "(request: 'Request', category: 'str' = Form(), message: 'str' = Form())",
+  "doc": "Hekim öneri/geri bildirimi → DB'ye kaydet + founder'a e-posta (best-effort).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/fatura-bilgileri",
+  "metot": [
+   "GET"
+  ],
+  "ad": "billing_page",
+  "modul": "saglik.app.account_routes",
+  "satir": 678,
+  "imza": "(request: 'Request', plan: 'str' = '', pkg: 'str' = '', err: 'str' = '')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/fatura-bilgileri",
+  "metot": [
+   "POST"
+  ],
+  "ad": "billing_submit",
+  "modul": "saglik.app.account_routes",
+  "satir": 724,
+  "imza": "(request: 'Request', plan: 'str' = '', pkg: 'str' = '', btype: 'str' = Form(bireysel), bname: 'str' = Form(), tckn_vkn: 'str' = Form(), tax_office: 'str' = Form(), address: 'str' = Form(), city: 'str' = Form())",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/checkout",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_checkout",
+  "modul": "saglik.app.account_routes",
+  "satir": 779,
+  "imza": "(request: 'Request', plan: 'str' = Form(aylik))",
+  "doc": "⚠⚠ 2026-08-09 (#142b): sağlayıcı artık GLOBAL env değil **HEKİMİN PAZARI**.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/portal",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_portal",
+  "modul": "saglik.app.account_routes",
+  "satir": 844,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/abonelik",
+  "metot": [
+   "GET"
+  ],
+  "ad": "abonelik_page",
+  "modul": "saglik.app.account_routes",
+  "satir": 885,
+  "imza": "(request: 'Request', ok: 'str' = '', iptal: 'str' = '', session_id: 'str' = '')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/stripe/webhook",
+  "metot": [
+   "POST"
+  ],
+  "ad": "stripe_webhook",
+  "modul": "saglik.app.account_routes",
+  "satir": 1000,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/iyzico/callback",
+  "metot": [
+   "POST"
+  ],
+  "ad": "iyzico_callback",
+  "modul": "saglik.app.account_routes",
+  "satir": 1064,
+  "imza": "(request: 'Request')",
+  "doc": "iyzico Checkout Form dönüşü — hosted form ödeme sonrası tarayıcıyı buraya `token` ile",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/odeme/sonuc",
+  "metot": [
+   "GET"
+  ],
+  "ad": "odeme_sonuc",
+  "modul": "saglik.app.account_routes",
+  "satir": 1211,
+  "imza": "(request: 'Request', durum: 'str' = '', tur: 'str' = '')",
+  "doc": "Ödeme sonuç sayfası (başarılı/tamam/iptal/beklemede) — iyzico callback buraya yönlendirir.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/iyzico/abonelik/callback",
+  "metot": [
+   "POST"
+  ],
+  "ad": "abonelik_callback",
+  "modul": "saglik.app.abonelik_routes",
+  "satir": 253,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/iyzico/webhook",
+  "metot": [
+   "POST"
+  ],
+  "ad": "iyzico_webhook",
+  "modul": "saglik.app.abonelik_routes",
+  "satir": 325,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/abonelik/iptal",
+  "metot": [
+   "POST"
+  ],
+  "ad": "abonelik_iptal",
+  "modul": "saglik.app.abonelik_routes",
+  "satir": 368,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/abonelik/kart",
+  "metot": [
+   "POST"
+  ],
+  "ad": "abonelik_kart",
+  "modul": "saglik.app.abonelik_routes",
+  "satir": 391,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/iyzico/kart/callback",
+  "metot": [
+   "POST"
+  ],
+  "ad": "kart_callback",
+  "modul": "saglik.app.abonelik_routes",
+  "satir": 414,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/odeme/aktivasyon",
+  "metot": [
+   "POST"
+  ],
+  "ad": "admin_aktivasyon",
+  "modul": "saglik.app.abonelik_routes",
+  "satir": 468,
+  "imza": "(request: 'Request')",
+  "doc": "PENDING abonelikleri aktive et — YALNIZ ADMİN, POST. Aktivasyon = çekim (para eylemi):",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/panel",
+  "metot": [
+   "GET"
+  ],
+  "ad": "panel_page",
+  "modul": "saglik.app.panel_routes",
+  "satir": 180,
+  "imza": "(request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/{did}/sorular",
+  "metot": [
+   "GET"
+  ],
+  "ad": "admin_doctor_questions_page",
+  "modul": "saglik.app.admin_hekim",
+  "satir": 38,
+  "imza": "(did: 'int', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/{did}/hastalar",
+  "metot": [
+   "GET"
+  ],
+  "ad": "admin_hasta_listesi",
+  "modul": "saglik.app.admin_hasta",
+  "satir": 191,
+  "imza": "(did: 'int', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/{did}/hasta/{cid}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "admin_hasta_detay",
+  "modul": "saglik.app.admin_hasta",
+  "satir": 243,
+  "imza": "(did: 'int', cid: 'int', request: 'Request')",
+  "doc": "TAM İÇERİK (founder K1): anlatı, kronik, ilaçlar, alerji, ziyaretler, sentezler,",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/admin/{did}/eylemler",
+  "metot": [
+   "GET"
+  ],
+  "ad": "admin_eylemler",
+  "modul": "saglik.app.admin_hasta",
+  "satir": 343,
+  "imza": "(did: 'int', request: 'Request')",
+  "doc": "`app.doctor_event` zaman çizgisi + yüzey dağılımı (founder K2).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/recete-kontrolu",
+  "metot": [
+   "GET"
+  ],
+  "ad": "recete_hub_page",
+  "modul": "saglik.app.recete_routes",
+  "satir": 217,
+  "imza": "(request: 'Request')",
+  "doc": "İki ücretsiz kontrol aracının giriş kapısı. Kayıt yok, kredi yok, LLM yok.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/sgk-odeme",
+  "metot": [
+   "GET"
+  ],
+  "ad": "sgk_odeme_page",
+  "modul": "saglik.app.recete_routes",
+  "satir": 254,
+  "imza": "(request: 'Request')",
+  "doc": "Ek-4/A liste araması — hub'ın üçüncü aracı. Kayıt yok, kredi yok, LLM yok.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/bobrek-doz",
+  "metot": [
+   "GET"
+  ],
+  "ad": "bobrek_doz_page",
+  "modul": "saglik.app.recete_routes",
+  "satir": 301,
+  "imza": "(request: 'Request', egfr: 'str' = '', d: 'str' = '')",
+  "doc": "Etiket-temelli böbrek doz kontrolü — kayıt gerekmez, kredi harcamaz, LLM yok.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/recete-kontrol",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_recete_kontrol",
+  "modul": "saglik.app.recete_case",
+  "satir": 933,
+  "imza": "(cid: 'int', request: 'Request')",
+  "doc": "Hasta kartındaki ilaç listesini dört LLM'siz kontrolden geçir. Kredi 0.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/sgk-kontrol",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_sgk_kontrol",
+  "modul": "saglik.app.sgk_case",
+  "satir": 111,
+  "imza": "(cid: 'int', request: 'Request')",
+  "doc": "Hastanın ilaç listesindeki ürünlerin Ek-4/A liste durumu. Kredi 0, LLM yok.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/sgk-ara",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_sgk_ara",
+  "modul": "saglik.app.sgk_ara",
+  "satir": 202,
+  "imza": "(request: 'Request', q: 'str' = '')",
+  "doc": "Ek-4/A araması. Herkese açık, kredi 0, LLM yok.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/hastalik-ara",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_hastalik_ara",
+  "modul": "saglik.app.hastalik",
+  "satir": 263,
+  "imza": "(request: 'Request', q: 'str' = '')",
+  "doc": "Hastalık adı araması — ücretsiz, LLM yok, kayıt gerekmez.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/hastalik/{did}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "api_hastalik",
+  "modul": "saglik.app.hastalik",
+  "satir": 285,
+  "imza": "(did: 'int', request: 'Request')",
+  "doc": "Tek hastalık kartı — ücretsiz, LLM yok.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/hastaliklar",
+  "metot": [
+   "GET"
+  ],
+  "ad": "hastaliklar_page",
+  "modul": "saglik.app.hastalik",
+  "satir": 304,
+  "imza": "(request: 'Request')",
+  "doc": "Arama + kart + soru kutusu. Kart ücretsiz; soru mevcut sohbet yoluna taşınır.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/deger-onayla",
+  "metot": [
+   "POST"
+  ],
+  "ad": "deger_onayla",
+  "modul": "saglik.app.deger_onay",
+  "satir": 127,
+  "imza": "(cid: 'int', request: 'Request', alan: 'str' = Form(), deger: 'str' = Form())",
+  "doc": "YALNIZ onaylanan alanı yazar; kartın geri kalanı AYNEN korunur.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/rad-takip",
+  "metot": [
+   "POST"
+  ],
+  "ad": "rad_takip",
+  "modul": "saglik.app.rad_case",
+  "satir": 236,
+  "imza": "(cid: 'int', request: 'Request', bulgu_idx: 'str' = Form(), ay: 'str' = Form())",
+  "doc": "YALNIZ takvime yazar. Gövde `bulgu_idx` + `ay`; başka alan yok sayılır.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/goruntu-onoku",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_goruntu_onoku",
+  "modul": "saglik.app.on_okuma",
+  "satir": 341,
+  "imza": "(request: 'Request')",
+  "doc": "Sohbet 'Görüntü ön-okuma' modu (WP-4 istemcisi). Ağır iş havuzda (M5).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/files/{fid}/on-oku",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_on_oku",
+  "modul": "saglik.app.on_okuma",
+  "satir": 514,
+  "imza": "(cid: 'int', fid: 'int', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/on-okuma-onayla",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_on_okuma_onayla",
+  "modul": "saglik.app.on_okuma",
+  "satir": 606,
+  "imza": "(cid: 'int', request: 'Request', fid: 'str' = Form(), karar: 'str' = Form(), metin: 'str' = Form())",
+  "doc": "LLM 0 · `record_usage` 0. Beyaz liste dışı `karar` → 303 (yazma yok). `onaylandi` + `onay_reddi` → 400.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/files/{fid}/belge-oku",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_belge_oku",
+  "modul": "saglik.app.on_okuma",
+  "satir": 642,
+  "imza": "(cid: 'int', fid: 'int', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/cases/{cid}/goruntu-kaydet",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_goruntu_kaydet",
+  "modul": "saglik.app.on_okuma_kaydet",
+  "satir": 83,
+  "imza": "(cid: 'int', request: 'Request')",
+  "doc": "Sohbette ön-okunan görselleri hasta kartına ŞİFRELİ kaydet + ön-okumayı `pending` iliştir.",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/api/etkilesim/yorum",
+  "metot": [
+   "POST"
+  ],
+  "ad": "api_etkilesim_yorum",
+  "modul": "saglik.app.etkilesim_yorum",
+  "satir": 680,
+  "imza": "(request: 'Request')",
+  "doc": "`/etkilesim` taramasının AI yorumu — giriş + 1 kredi (founder kararı 2026-08-18).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/kilavuz",
+  "metot": [
+   "GET"
+  ],
+  "ad": "guide_page",
+  "modul": "saglik.app.main",
+  "satir": 1201,
+  "imza": "(request: 'Request')",
+  "doc": "Kullanım kılavuzu — herkese açık (kayıt öncesi de okunabilir). Dil rotada seçilir;",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/chatgpt",
+  "metot": [
+   "GET"
+  ],
+  "ad": "chatgpt_landing",
+  "modul": "saglik.app.main",
+  "satir": 1272,
+  "imza": "(request: 'Request')",
+  "doc": "`/chatgpt` → 302 → `/` (sorgu dizesi korunur). Gerekçe: yukarıdaki blok.",
+  "sinif": "APIRoute",
+  "schema": false
+ },
+ {
+  "yol": "/guvenlik",
+  "metot": [
+   "GET"
+  ],
+  "ad": "security_page",
+  "modul": "saglik.app.main",
+  "satir": 1279,
+  "imza": "(request: 'Request')",
+  "doc": "Güvenlik ve veri koruması — herkese açık güven sayfası (2026-07-19 ajan paneli P1).",
+  "sinif": "APIRoute",
+  "schema": true
+ },
+ {
+  "yol": "/yasal/{slug}",
+  "metot": [
+   "GET"
+  ],
+  "ad": "legal_page",
+  "modul": "saglik.app.main",
+  "satir": 1311,
+  "imza": "(slug: 'str', request: 'Request')",
+  "doc": "",
+  "sinif": "APIRoute",
+  "schema": true
+ }
+]
